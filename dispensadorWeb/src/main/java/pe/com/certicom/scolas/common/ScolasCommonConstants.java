@@ -3,11 +3,7 @@ package pe.com.certicom.scolas.common;
 public class ScolasCommonConstants {
 
 	public final static int CERO=0;
-	public final static int UNO=1;
-	public final static int DOS=2;
-	public final static int TRES=3;
 
-	public final static int TIPO_ATENCION_CABINA=4;
 	public final static String VALIDACION_CAMPO_OBLIGATORIO = "Obligatorio";
 	/**
 	 * Mensajes a mostrarse despues del grabado de una pagina. 
@@ -46,7 +42,6 @@ public class ScolasCommonConstants {
 	
 	public final static String MSG_SUPERO_CANTIDAD_DIGITO = "Supero  limite maximo de digitos";
 	public final static String MSG_LOGIN_INCORRECTO = "Usuario o password incorrecto";
-	public final static String MSG_LOGIN_SINPEFIL = "Usuario sin perfil de dispensador";
 	public final static String MSG_ESCANNER_DESCONECTADO = "No hay dispositivo conectado en puerto COM3";
 	public final static String MSG_COMPLETE_DNI= "Ingrese los 8 digitos completos del DNI";
 	public final static String MSG_MENSAJE_ESCANEAR = "pase el  DNI por la lectora";
@@ -54,17 +49,10 @@ public class ScolasCommonConstants {
 	public final static String TIPO_MENSAJE_INFORMACION = "mensaje de informacion:";
 	public final static String TIPO_MENSAJE_ERROR= "mensaje de error:";
 	public final static String MSG_CLIENTE_ATENDIDO= "El cliente se encuentra en atención";
-	public final static String MSG_NUMERO_DOCUMENTO_VACIO= "debe comppletar número de documento.";
-	public final static String MSG_NUMERO_RUC_VACIO= "debe comppletar número de RUC.";
 	
 	
 	public final static String UNO_STRING= "1";
 	public final static String CERO_STRING= "0";
-	public final static String DOS_STRING= "2";
-	public final static String TRES_STRING= "3";
-	public final static String CUATRO_STRING= "4";
-	public final static String CINCO_STRING= "5";
-	
 	
 	
 	

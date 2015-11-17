@@ -4,7 +4,7 @@ package pe.com.certicom.scolas.controller;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
+
 import javax.annotation.PostConstruct;
 
 import org.jboss.logging.Logger;
@@ -40,6 +40,8 @@ public class TipoTicketController extends BaseController {
 	private List<TipoTicket> lstTipoTicket;
 	private String impresion ; 
 	private Ticket ticket;
+
+
 
 	@Autowired
 	ImpresoraService impresoraService;
@@ -78,23 +80,7 @@ public class TipoTicketController extends BaseController {
 		try {
 			if (mostrarPopup){
 				
-				String esgenerico = FacesUtil.getObjectSession("esgenerico").toString();
-				
-				if(esgenerico.equals(ScolasCommonConstants.CERO_STRING)){
-					FacesUtil.setObjectSession("ticket",null);
-					FacesUtil.setObjectSession("tipoDocumento",null);
-					FacesUtil.redirect(ScolasCommonConstants.XHTML_PRINCIPAL);
-					
-					//mostrarprincipal = true;
-				}else{
-					FacesUtil.setObjectSession("ticket",null);
-					FacesUtil.setObjectSession("tipoDocumento",null);
-					FacesUtil.redirect(ScolasCommonConstants.XHTML_PRINCIPAL2);
-					
-				}
-				
-				
-				
+					FacesUtil.redirect(ScolasCommonConstants.XHTML_INDEX);
 				
 			}
 		} catch (IOException e) {
@@ -107,56 +93,32 @@ public class TipoTicketController extends BaseController {
 	public void generarTicket(TipoTicket beanTipoTicket){
 	try {
 			ticket =  new  Ticket();
-			
-			Ticket ticketBean=(Ticket)FacesUtil.getObjectSession("ticket");	
-			if(ticketBean!=null){
-				
-					ticket.setRazonSocial(ticketBean.getRazonSocial());
-					ticket.setNombreCliente(ticketBean.getRazonSocial());
-					ticket.setRuc(ticketBean.getRuc());
-					ticket.setCodRestricDomicilio(ticketBean.getCodRestricDomicilio());
-					ticket.setEstadoContribuyente(ticketBean.getEstadoContribuyente());
-					ticket.setCodEstadoContribuyente(ticketBean.getCodEstadoContribuyente());
-					ticket.setUbigeoRUC(ticketBean.getUbigeoRUC()); 
-					ticket.setCondicionDomicilio(ticketBean.getCondicionDomicilio());			
-					ticket.setCodCondicionDomicilio(ticketBean.getCodCondicionDomicilio());
-					ticket.setCodDependencia(ticketBean.getCodDependencia());
-					ticket.setNombreDependencia(ticketBean.getNombreDependencia());
-			}
-			
-			String esgenerico=FacesUtil.getObjectSession("esgenerico").toString();
-			
-			
-			String tipoDocumentoTemp=FacesUtil.getObjectSession("tipoDocumento").toString();
-			
-			if(esgenerico.equals(ScolasCommonConstants.UNO_STRING)){
-
-				if(tipoatencionBean.getIdTipoAtencion()==ScolasCommonConstants.TIPO_ATENCION_CABINA){				
-					Random randon= new Random();					
-					Integer dig9 =randon.nextInt(900000000)+100000000;					
-					ticket.setCodGeneradoCab(dig9.toString());
-					
-				}							
-			} 
-			
-			if(tipoDocumentoTemp!=null){
-				ticket.setIdTipoDocumento(Integer.parseInt(tipoDocumentoTemp));
-			}
-			else {
-				ticket.setIdTipoDocumento(Integer.parseInt(ScolasCommonConstants.CINCO_STRING));
-			}
-			
 			ticket.setIdTipoTicket(beanTipoTicket.getIdTipoTicket());
 			ticket.setFecha(FechasUtil.getFechaActualSinHora());
-			ticket.setDerivado(false);			
+			ticket.setDerivado(false);
 			ticket.setHoraEmision(new Date());
 			ticket.setIdEstado(ScolasCommonConstants.ESTADO_TICKET_EMITIDO);
 			ticket.setEsTitular(false);
 			ticket.setEsTercero(false);
 			ticket.setEsApoderado(false);
 			
+			String tipoCliente =FacesUtil.getObjectSession("cliente").toString(); 
 			
+			if(tipoCliente.equals("apoderado")) {
+				ticket.setEsApoderado(true);
+			}
+			else if (tipoCliente.equals("titular")){
+				ticket.setEsTitular(true);
+			}
+			else {
+				ticket.setEsTercero(true);
+			}
 			
+			ticket.setDni(FacesUtil.getObjectSession("dni2").toString());
+			
+			if (FacesUtil.getObjectSession("nombre")!=null){
+				ticket.setNombreCliente(FacesUtil.getObjectSession("nombre").toString());			
+			}
 			
 			
 			Ticket ticketTemp= new Ticket();
@@ -169,6 +131,7 @@ public class TipoTicketController extends BaseController {
 			System.out.println("este es el  codigo  de ticket : "+ ticketTemp.getIdTicket());
 			
 			FacesUtil.setObjectSession("nombre", null);
+			FacesUtil.setObjectSession("cliente", null);
 			FacesUtil.setObjectSession("dni2", null);
 			
 		} catch (Exception e) {

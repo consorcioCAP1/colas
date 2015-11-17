@@ -1,38 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-	<h:head>
-		<title><ui:insert name="title">Sistema de Colas:Dispensador</ui:insert></title>
-	</h:head>
-
-	<h:body>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+	<title><ui:insert name="title">Sistema - COLAS</ui:insert></title>
+</h:head> 
+	
+<h:body> 
+		
+		
 		<div id="north"  class="x-hide-display">
 			<ui:insert name="header" >
-			  <ui:include src="/pages/facelets/fragments/header.xhtml" />		 
+			  <ui:include src="/pages/facelets/fragments/header.xhtml" />
 			</ui:insert>
 	    </div>
-   
-	     <div id="west" class="x-hide-display" >	    	
+ 
+	    <div id="west"  class="x-hide-display">	    	
+			<h:form>
+				<p:panel header="USUARIO" toggleable="true" toggleTitle="contraer"  >							
+					<h:panelGrid label="MANTENIMIENTO DE USUARIOS" >
+						<h:commandLink value="Nuevo Usuario" actionListener="#{registrarUsuarioController.pageRegistrarUsuario}"/>
+						<p:spacer height="8px"></p:spacer>
+						<h:commandLink value="Listado de Usuarios" actionListener="#{listarUsuarioController.pageListarUsuario}"/>
+						
+					</h:panelGrid>
+					</p:panel>
 					
+					<p:panel header="VENTANILLA" toggleable="true" toggleTitle="contraer"  >
+					<h:panelGrid label="MANTENIMIENTO DE VENTANILLAS" >
+						<h:commandLink value="Nueva Ventanilla" actionListener="#{registrarVentanillaController.pageRegistrarVentanilla}"/>
+						<p:spacer height="8px"></p:spacer>
+						<h:commandLink value="Listado de Ventanillas" actionListener="#{listarVentanillaController.pageListarVentanilla}"/>
+						
+					</h:panelGrid>					
+				</p:panel>
+			</h:form>		
     	</div>
-	    
- 		<div id="center"  class="ui-fluid" >
-			<ui:insert name="body" >
-			</ui:insert>
+    	
+	    	<div id="center"  class="x-hide-display">
+				<ui:insert name="body"></ui:insert>
+			</div>
+		<div id="east" class="x-hide-display">derecha</div>
+    	<div id="south" class="x-hide-display" >
+    	Copyright 2015 Area de Desarrollo - Certicom
+		
 		</div>
-	
-    	<div id="south"  >
-    	<div align="center" style="HEIGHT:100% " >
-			Copyright 2015 Area de Desarrollo - Consorcio CAP
-		</div>
-		</div>
-			<h:outputScript library="js" name="border.js" target="head" />
-			<h:outputStylesheet library="css" name="styles.css" target="head" />
-			
-
-	
-	</h:body>
+		<h:outputStylesheet library="css" name="styles.css" target="head" />
+		<h:outputStylesheet library="css" name="ext-all.css" target="head" />
+		<h:outputScript library="js" name="ext-all.js" target="head" />
+		<h:outputScript library="js" name="border.js" target="head" />
+		<h:outputScript library="js" name="autocomplete.js" target="head" />      
+		      
+</h:body> 
 </html>

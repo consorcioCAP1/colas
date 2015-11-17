@@ -24,6 +24,4 @@ public interface TicketMapper {
 	Integer selectMaxOrden(Ticket bean);
 	
 	public void updateAletar();
-	
-	public String selectUbigeoByCodigo(String idUbigeo);
 }

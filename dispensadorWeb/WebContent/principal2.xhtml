@@ -13,7 +13,20 @@
 
 	<h:form prependId="false">
 		<div  style="HEIGHT: 120px" class="content" >					
-        	
+        	<p:panel id="panel1" header="Datos solicitante" >		        	
+    			<h:panelGrid columns="2" >			    				    		
+			    	<p:outputLabel value="DNI:" style="font-weight: bold;"></p:outputLabel>					    			
+			    	<p:outputLabel value="#{principal2Controller.dni}"></p:outputLabel>    		
+		    	</h:panelGrid>	
+		    	<h:panelGrid columns="1" rendered="#{principal2Controller.mostrarNombreCompleto}">
+		    		<p:outputLabel value="Nombre Completo:"  style="font-weight: bold;"></p:outputLabel>					    			
+			    	<p:outputLabel value="#{principal2Controller.nombreCompleto}"></p:outputLabel>	    		    		
+	    		</h:panelGrid>	    			
+	      	 </p:panel> 
+	      	 <p:resizable for="panel1" />
+	      	 <br/>
+	      	 <br/>
+	      	 <br/>
 	      	 <br/>
 	      	 
 	      	 <p:panel id="panel2"  header="Tipo Atencion" >		        	
@@ -28,7 +41,17 @@
 		      	 <br/>
 		      	 <br/>
     			
-	      	 	
+    			<h:panelGrid columns="1">		    					    			
+			    	<p:commandButton value="Atras" action="#{principal2Controller.regresar()}" style="width:150px;height:40px;  background-image:none;background-color: blue;color: white;"/>	    		    		
+	    		</h:panelGrid>
+	    			
+	      	 	 <h:panelGrid columns="1" id="dlgClienteEnAtencion">	
+					<p:dialog header="ticket en Atención" height="100" modal="true"
+			  				visible="#{principal2Controller.mostrarPopup}">
+				    	<h:outputText value="El cliente se encuentra en atención." />
+					</p:dialog> 
+				</h:panelGrid>
+	      	 
 	      	 </p:panel> 
 	      	 <p:resizable for="panel2" />
 	      	 
@@ -36,7 +59,7 @@
 	      	      		
        	</div>	        
 
-		 
+		  <p:poll interval="2" listener="#{principal2Controller.redirecPrincipio}"/>
 
     </h:form>
 

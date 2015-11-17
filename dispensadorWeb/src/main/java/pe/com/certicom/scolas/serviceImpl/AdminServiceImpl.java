@@ -10,12 +10,10 @@ import com.sun.org.apache.bcel.internal.generic.LSTORE;
 
 import pe.com.certicom.scolas.common.ScolasCommonConstants;
 import pe.com.certicom.scolas.model.beans.ClientesOnp;
-import pe.com.certicom.scolas.model.beans.Dispensador;
 import pe.com.certicom.scolas.model.beans.Ticket;
 import pe.com.certicom.scolas.model.beans.TipoAtencion;
 import pe.com.certicom.scolas.model.beans.TipoTicket;
 import pe.com.certicom.scolas.model.service.ClientesONPService;
-import pe.com.certicom.scolas.model.service.DispensadorService;
 import pe.com.certicom.scolas.model.service.TicketService;
 import pe.com.certicom.scolas.model.service.TipoAtencionService;
 import pe.com.certicom.scolas.model.service.TipoTicketService;
@@ -39,9 +37,6 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired 
 	ClientesONPService	clienteONPService;
-	
-	@Autowired 
-	DispensadorService dispensadorService;
 
 	public List<TipoAtencion>listarTipoAtencionByCriteria(CriteriaManager criteriaManager) throws Exception{
 				return tipoAtencionService.select(criteriaManager);
@@ -61,8 +56,29 @@ public class AdminServiceImpl implements AdminService {
 	
 	public Ticket generarTicket (Ticket bean) throws Exception{
 		
+		ClientesOnp clienteONPBean= clienteONPService.selectByPrimaryKeyString(bean.getDni().trim());
 		
-		bean.setNombreCliente("--");			
+		if (clienteONPBean!=null) {
+			if(bean.getNombreCliente()==null){
+				 bean.setNombreCliente(clienteONPBean.getNombres());	
+			} 	
+		}
+		else {
+			ClientesOnp cliente = new ClientesOnp();
+			cliente.setDni(bean.getDni().trim());
+			if(bean.getNombreCliente()!=null){
+				cliente.setNombres(bean.getNombreCliente().trim());
+				cliente.setEsDniPorLector(ScolasCommonConstants.UNO_STRING);
+				
+			 } 
+			else {cliente.setNombres("--");
+					bean.setNombreCliente("--");
+			
+				}
+			
+			clienteONPService.insertBean(cliente);
+			
+		}
 		TipoTicket tipoTicket = tipoTicketService.selectByPrimaryKey(bean.getIdTipoTicket()); 
 		bean.setOrden(this.cantidadTicketsEmitidosEnDiaPorTipoTicket(bean.getIdTipoTicket()));
 		bean.setCodigoImpresion(tipoTicket.getCodigoImpresion()+bean.getOrden());
@@ -83,19 +99,5 @@ public class AdminServiceImpl implements AdminService {
 	public List<Ticket> selectTicketByCriteria(CriteriaManager criteriaManager)throws Exception{
 		return ticketService.select(criteriaManager);
 	} 
-	
-	public List<Dispensador> selectDispensadorByCriteria(CriteriaManager criteriaManager)throws Exception{
-		return dispensadorService.select(criteriaManager);
-	} 
-	
-	
-	public List<Ticket> buscarRucByRepreLegal(String tipoDocumento,String numeroDocumento)throws Exception{
-		return ticketService.buscarRucByRepreLegal(tipoDocumento, numeroDocumento);
-	} 
-	public Ticket buscarRucByTitular(String tipoDocumento,String numeroDocumento,Boolean esTitular) throws Exception{
-		
-		
-		return ticketService.buscarRucByTitular(tipoDocumento, numeroDocumento, esTitular);
-	}
 	
 }

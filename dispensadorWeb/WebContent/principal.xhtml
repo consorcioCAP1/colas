@@ -1,136 +1,129 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	template="/pages/facelets/templates/template.xhtml"
-	>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
 
-
-<ui:define name="body">	
-	<script type="text/javascript">
-	function onKeyPressNumbers(e)
-		{
-		   var key = window.event ? e.keyCode : e.which;
-		   var keychar = String.fromCharCode(key);
-		   reg = /\D/;
-		   return !reg.test(keychar);
-		}
-
-	
-	</script>
-
-	<h:form  id="formPrincipal">
-		<div  style="HEIGHT: 120px" class="content" >					
-          	 <p:messages id="messages" showDetail="false"  closable="true" style="WIDTH:350px; float:center" />
-	      	 <p:panel id="panel2"  >		        	
-    				<p:panel id="panel1"  header="Consulta de Datos"> 
-	    				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-					        <p:outputLabel for="tipoDocumento" value="Tipo Documento:" />
-					        <h:selectOneRadio id="tipoDocumento" value="#{principalController.tipoDocumento}">
-					            <f:selectItem itemLabel="DNI" itemValue="1" />
-					            <f:selectItem itemLabel="CE" itemValue="2" />
-					            <f:selectItem itemLabel="Pasaporte" itemValue="3" />
-					            <f:selectItem itemLabel="CDI" itemValue="4" />
-					            <f:selectItem itemLabel="S/I" itemValue="5" />
-					              
-					        </h:selectOneRadio>
-						   </h:panelGrid>
-	    				
-	    				<h:panelGrid columns="2">
-		    				<p:outputLabel value="N° de documento:"></p:outputLabel>
-		    				<p:inputText value="#{principalController.numeroDocumento}" 
-		    				 onkeypress="return onKeyPressNumbers(event);" ></p:inputText>
-		      	 		</h:panelGrid>
-		      	 		
-		      	 		<br></br>
-		      	 		
-		      	 		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-					        <p:outputLabel for="cliente" value="¿para quien es el servicio?" />
-					        <h:selectOneRadio id="cliente" value="#{principalController.cliente}">
-					            <f:selectItem itemLabel="Titular" itemValue="1" />
-					            <f:selectItem itemLabel="Rep Legal" itemValue="2" />
-					            <f:selectItem itemLabel="Tercero" itemValue="3" />
-					            <p:ajax update="panelGridEmpresas messages panelGridDatos" listener="#{principalController.buscarRepreLegal()}"/>           
-					         
-					         </h:selectOneRadio>
-						 </h:panelGrid>
-	    				
-	    				<h:panelGrid columns="4">
-		    				<p:outputLabel value="N° de RUC:"></p:outputLabel>
-		    				<p:inputText value="#{principalController.numeroRuc}"
-		    				onkeypress="return onKeyPressNumbers(event);"></p:inputText>
-		    				<p:outputLabel value="N° de RUC:"></p:outputLabel>
-		    				<p:commandButton value="Buscar" action="#{principalController.buscarRuc}" update="panelGridEmpresas messages panelGridDatos"></p:commandButton>
-		      	 		</h:panelGrid>
-	      	 		</p:panel>
-		      	 	 <h:panelGrid id="panelGridEmpresas">
-				      	 <p:panel header="Datos encontrados" id="panelEmpresas" rendered="#{principalController.mostrarRadio}">
-				      	 	<h:panelGrid columns="2">
-					      	 	<p:outputLabel for="empresas" value="Seleccionar Empresa:" />
-						        <p:selectOneRadio id="empresas" value="#{principalController.empresaSeleccionada}" >
-						            <f:selectItems  value="#{principalController.lstItem}" ></f:selectItems>		
-						            <p:ajax update="panelGridEmpresas messages panelGridDatos" listener="#{principalController.cargarTicketLista()}"/>           
-						  		 </p:selectOneRadio>	
-						  		 	
-						  		 <p:commandButton value="seleccionar" action="#{principalController.cargarTicketLista()}" update="panelGridEmpresas messages panelGridDatos"></p:commandButton>
-					  		 </h:panelGrid>	
-					  		 	      	 
-				      	 </p:panel>
-			      	 </h:panelGrid>
-	      	 		 <h:panelGrid id="panelGridDatos">
-				      	 <p:panel header="Datos Cliente" id="panelDatos" rendered="#{principalController.mostrarDatos}">
-				      	 	<h:panelGrid columns="2">
-					      	 	 <p:outputLabel value="Nombre Ciudad:" />
-						       	 <p:outputLabel value="#{principalController.ticketBean.ubigeoDescripcion}" />
-						       	 
-						       	 <p:outputLabel value="RUC:" />
-						       	 <p:outputLabel value="#{principalController.ticketBean.ruc}" />
-						       	 
-						       	 <p:outputLabel value="Nombre Empresa:" />
-						       	 <p:outputLabel value="#{principalController.ticketBean.nombrePersona}"/>
-						        
-						         <p:outputLabel value="Condicion Domicilio:" />
-						       	 <p:outputLabel value="#{principalController.ticketBean.condicionDomicilio}" />
-						       	
-						       	 <p:outputLabel value="Restrincion Domicilio:" />
-						       	 <p:outputLabel value="#{principalController.ticketBean.codRestricDomicilio}" />
-						       	 
-						       	 <p:outputLabel value="Estado del Controbuyente:" />
-						       	 <p:outputLabel value="#{principalController.ticketBean.estadoContribuyente}" />
-						       	
-						       	 <p:outputLabel value="Dependencia:" />
-						       	 <p:outputLabel value="#{principalController.ticketBean.nombreDependencia}" />
-					       </h:panelGrid>
-					       
-					       <br/>
-					       <h:panelGrid>
-					       		<p:commandButton value="Seleccionar Ticket" action="#{principalController.seleccionarTicket}"></p:commandButton>
-					       		
-					       		
-					       </h:panelGrid>
-					             	 
-				      	 </p:panel>
-			      	 </h:panelGrid>
-	      	 		
-	      	  	
-						      	 	
-	      	 </p:panel>
-	      	
-	      	 <p:resizable for="panel2" />
-	      	 
-	      	 
-	      	      		
-       	</div>	        
-
-		 
-
+<h:head>  
+	<title>DISPENSADOR WEB</title>   
+</h:head>
+<script type="text/javascript">
+	function SelectAll(id)
+	{
+	    document.getElementById(id).focus();
+	    document.getElementById(id).select();
+	}
+</script>
+	<h:form prependId="false" >
+		 <br/>
+      	 <br/>
+      	 <br/>
+      	 <br/>
+      	 <br/>
+      	 
+		<div  align="center"  style="HEIGHT: 1200px" class="ui-fluid" >	
+						
+        	<p:panel id="panel1"  style="float:center" >
+		    	 
+		    	<h:panelGrid columns="2" id="panelBotonEscanner">
+		    		<p:commandButton value="Por Escanner" action="#{principalController.metodo}"
+		    		
+		    		update="panelDni panelBotonEscanner panelBotones msgs botonAtras" 
+		    		rendered="#{principalController.mostrarBotonScanner}"> </p:commandButton>
+		    		<p:commandButton value="Solo Pantalla"   action="#{principalController.mostrarPantalla}" 
+		    		update="panelBotones panelDni panelBotonEscanner msgs botonAtras" 
+		    		rendered="#{principalController.mostrarBotonScanner}"> </p:commandButton>
+		    	 </h:panelGrid>
+		    	
+		    	<h:panelGrid columns="3" id="panelDni" >		    	
+			    	<p:focus context="panelDni"/>
+			    	<h:panelGrid columns="3" id="panelTextDni1" >	
+			    		<p:outputLabel value="DNI:"  rendered="#{principalController.renderDni}"></p:outputLabel>	
+				    	 <p:inputText value="#{principalController.dni}" id="txtdniValue"				    	 
+				    	  rendered="#{principalController.renderDni}" 
+				    	  style="font-weight: bold; WIDTH:95px;" maxlength="8" >				    	   		
+				    						    			  
+				    	</p:inputText>
+				    	<h:outputText value="#{principalController.documento}" id="paneldni"></h:outputText>				
+		    		</h:panelGrid>
+	    		</h:panelGrid> 
+	    		<br/>
+	    		<p:messages id="msgs" showDetail="true"/> 
+	    		
+	    		<br/>
+	    		<br/>
+	    		
+	    		<h:panelGrid columns="3" id="panelBotones" >		    		
+		    	 		
+	    			<p:commandButton  action="#{principalController.numeros('1')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="1" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('2')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="2" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('3')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="3" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('4')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="4" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('5')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="5" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('6')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="6" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('7')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="7" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('8')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="8" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('9')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="9" style="width:125px;height:125px"/>
+		    		  
+		    		<p:commandButton  action="#{principalController.numeros('0')}" update="panelTextDni1 msgs botonAceptar"
+	    			rendered="#{principalController.mostrarBotones}" value="0" style="width:125px;height:125px"/>
+	    			
+		    		<h:panelGrid  columns="1" id="botonAceptar">
+			    		<p:commandButton  action="#{principalController.redirectAceptar}" value="Procesar"
+			    		rendered="#{principalController.mostrarBotones}" update="msgs" style="width:125px;height:125px; text-align:center"
+			    		onclick="SelectAll('txtdniValue');">
+			    					    		    
+			    		</p:commandButton>
+		    		</h:panelGrid>
+		    		<p:commandButton action="#{principalController.borrar}" value="Borrar"  update="panelTextDni1 msgs botonAceptar"  
+			    				rendered="#{principalController.renderDni}"								
+   		 				  		style="width:125px;height:125px; text-align:center; background-image:none;background-color: blue;color: white;">
+    		 				  		    
+		    		</p:commandButton> 
+		    		<p:outputLabel value="."></p:outputLabel>
+		    		<p:commandButton  action="#{principalController.limpiar}" value="Atras"  update="panelTextDni1 panelBotonEscanner panelBotones"
+			    		 rendered="#{principalController.renderDni}" style="width:125px;height:125px; background-image:none;background-color: blue;color: white;">
+			    	</p:commandButton>
+			    	<p:commandButton  action="#{principalController.limpiar}" value="Atras"  update="panelTextDni1 panelBotonEscanner panelBotones"
+			    		 rendered="#{principalController.renderMensajeScanner}" style="width:125px;height:75px; background-image:none;background-color: blue;color: white;">
+			    	</p:commandButton>
+			    	 
+	    		</h:panelGrid>    
+	    		
+	    	
+	    		<h:panelGrid  columns="1" id="botonAtras">
+		    		<p:commandButton action="#{principalController.regresar}" value="Regresar"		    	 						
+    								rendered="#{principalController.mostrarRegresarInicio}"
+    		 				  		style="width:125px;height:40px; text-align:center; background-image:none;background-color: blue;color: white;">
+	    		 				  		    
+		    		</p:commandButton>
+		    	</h:panelGrid>
+		    					    			
+	      	 </p:panel>	 
+	      	 <p:resizable for="panel1" />       		
+       	</div>
+        <p:poll interval="2" listener="#{principalController.redirectLector}"/>
     </h:form>
 
-	
-</ui:define>		
-</ui:composition>
+</html>
 

@@ -114,13 +114,7 @@ public class Ticket {
     private String ubigeo;
 
     private Date fechanac;
-    
-    private String ubigeoDescripcion;
-    
-    private String ubigeoRUC;
 
-    
-    
     public Integer getIdTicket() {
         return idTicket;
     }
@@ -568,20 +562,4 @@ public class Ticket {
     public void setFechanac(Date fechanac) {
         this.fechanac = fechanac;
     }
-
-	public String getUbigeoDescripcion() {
-		return ubigeoDescripcion;
-	}
-
-	public void setUbigeoDescripcion(String ubigeoDescripcion) {
-		this.ubigeoDescripcion = ubigeoDescripcion;
-	}
-
-	public String getUbigeoRUC() {
-		return ubigeoRUC;
-	}
-
-	public void setUbigeoRUC(String ubigeoRUC) {
-		this.ubigeoRUC = ubigeoRUC;
-	}
 }

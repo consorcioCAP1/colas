@@ -58,7 +58,6 @@
     <result column="ind_tipo_llamado" property="indTipoLlamado" jdbcType="CHAR" />
     <result column="Ubigeo" property="ubigeo" jdbcType="VARCHAR" />
     <result column="FechaNac" property="fechanac" jdbcType="TIMESTAMP" />
-    <result column="UbigeoRUC" property="ubigeoRUC" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -99,7 +98,7 @@
     nombre_persona, Condicion_Domicilio, estado_contribuyente, Cod_Expediente, Cod_Solicitud, 
     es_titular, Id_Tipo_Ventanilla, NumeroTicket, es_apoderado, es_tercero, NUM_LLAMADOS, 
     id_ticket_derreac, reactivado, ind_derivado_prioridad, codigo_impresion, id_precola, 
-    ind_ticket_interno, ind_tipo_llamado, Ubigeo, FechaNac ,UbigeoRUC
+    ind_ticket_interno, ind_tipo_llamado, Ubigeo, FechaNac
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
     select
@@ -146,7 +145,7 @@
       es_tercero, NUM_LLAMADOS, id_ticket_derreac, 
       reactivado, ind_derivado_prioridad, codigo_impresion, 
       id_precola, ind_ticket_interno, ind_tipo_llamado, 
-      Ubigeo, FechaNac,UbigeoRUC)
+      Ubigeo, FechaNac)
     values (#{idTicket,jdbcType=INTEGER}, #{fecha,jdbcType=TIMESTAMP}, #{idTipoTicket,jdbcType=INTEGER}, 
       #{orden,jdbcType=INTEGER}, #{nombreCliente,jdbcType=NVARCHAR}, #{horaEmision,jdbcType=TIMESTAMP}, 
       #{horaAsignacion,jdbcType=TIMESTAMP}, #{horaInicioAtencion,jdbcType=TIMESTAMP}, 
@@ -166,7 +165,7 @@
       #{esTercero,jdbcType=BIT}, #{numLlamados,jdbcType=INTEGER}, #{idTicketDerreac,jdbcType=INTEGER}, 
       #{reactivado,jdbcType=BIT}, #{indDerivadoPrioridad,jdbcType=CHAR}, #{codigoImpresion,jdbcType=VARCHAR}, 
       #{idPrecola,jdbcType=INTEGER}, #{indTicketInterno,jdbcType=CHAR}, #{indTipoLlamado,jdbcType=CHAR}, 
-      #{ubigeo,jdbcType=VARCHAR}, #{fechanac,jdbcType=TIMESTAMP}, #{UbigeoRUC,jdbcType=VARCHAR})
+      #{ubigeo,jdbcType=VARCHAR}, #{fechanac,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.Ticket" >
    	<selectKey resultType="java.lang.Integer" keyProperty="idTicket" order="AFTER" >
@@ -343,10 +342,6 @@
       <if test="fechanac != null" >
         FechaNac,
       </if>
-      <if test="ubigeoRUC != null" >
-        UbigeoRUC,
-      </if>
-      
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="idTicket != null" >
@@ -517,10 +512,6 @@
       <if test="fechanac != null" >
         #{fechanac,jdbcType=TIMESTAMP},
       </if>
-       <if test="ubigeoRUC != null" >
-        #{ubigeoRUC,jdbcType=TIMESTAMP},
-      </if>
-      
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.Ticket" >
@@ -691,10 +682,6 @@
       <if test="fechanac != null" >
         FechaNac = #{fechanac,jdbcType=TIMESTAMP},
       </if>
-      <if test="ubigeoRUC != null" >
-        UbigeoRUC = #{ubigeoRUC,jdbcType=VARCHAR},
-      </if>
-      
     </set>
     where id_ticket = #{idTicket,jdbcType=INTEGER}
   </update>
@@ -754,8 +741,7 @@
       ind_ticket_interno = #{indTicketInterno,jdbcType=CHAR},
       ind_tipo_llamado = #{indTipoLlamado,jdbcType=CHAR},
       Ubigeo = #{ubigeo,jdbcType=VARCHAR},
-      FechaNac = #{fechanac,jdbcType=TIMESTAMP},
-      UbigeoRUC=#{ubigeoRUC,jdbcType=VARCHAR},
+      FechaNac = #{fechanac,jdbcType=TIMESTAMP}
     where id_ticket = #{idTicket,jdbcType=INTEGER}
   </update>
   
@@ -767,11 +753,5 @@
    <select id="updateAletar" statementType="CALLABLE" >
       exec generarAlertaPorCreacionTicket 
   </select>
-  
-   	<select id="selectUbigeoByCodigo" parameterType="java.lang.String" resultType="java.lang.String">
-   		 select departamento+'/'+provincia+'/'+distrito from UBIGEO with (READUNCOMMITTED) where Codigo= #{idUbigeo,jdbcType=VARCHAR}      
-	</select>
-  
-  
   
 </mapper>

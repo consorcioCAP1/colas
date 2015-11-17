@@ -17,8 +17,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/TicketMapper.xml"/>
 		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/ClientesOnpMapper.xml"/>
 		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/TextoTicketMapper.xml"/>
-		  <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/DispensadorMapper.xml"/>
-		 
 		 
 		 
 	</mappers>

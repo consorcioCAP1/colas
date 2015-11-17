@@ -318,6 +318,4 @@
       ult_user_modif = #{ultUserModif,jdbcType=VARCHAR}
     where id_usuario = #{idUsuario,jdbcType=INTEGER}
   </update>
-
-  
 </mapper>
