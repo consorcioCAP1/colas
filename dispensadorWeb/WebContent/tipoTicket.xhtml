@@ -35,7 +35,7 @@
 	    		</h:panelGrid>
 			    		
 			   <h:panelGrid columns="1" id="dlgConfirmacionTicket">	
-					<p:dialog header="ticket de cliente" height="100"
+					<p:dialog header="ticket de cliente" height="100"  modal="true" 
 			  				visible="#{tipoTicketController.mostrarPopup}">
 				    	<h:outputText value="#{tipoTicketController.impresion}" />
 					</p:dialog> 

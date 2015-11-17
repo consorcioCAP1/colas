@@ -29,10 +29,7 @@
         	<p:panel id="panel1"  style="float:center" >
 		    	 
 		    	<h:panelGrid columns="2" id="panelBotonEscanner">
-		    		<p:commandButton value="Por Escanner" action="#{principalController.metodo}"
 		    		
-		    		update="panelDni panelBotonEscanner panelBotones msgs botonAtras" 
-		    		rendered="#{principalController.mostrarBotonScanner}"> </p:commandButton>
 		    		<p:commandButton value="Solo Pantalla"   action="#{principalController.mostrarPantalla}" 
 		    		update="panelBotones panelDni panelBotonEscanner msgs botonAtras" 
 		    		rendered="#{principalController.mostrarBotonScanner}"> </p:commandButton>
@@ -122,7 +119,7 @@
 	      	 </p:panel>	 
 	      	 <p:resizable for="panel1" />       		
        	</div>
-        <p:poll interval="2" listener="#{principalController.redirectLector}"/>
+        
     </h:form>
 
 </html>

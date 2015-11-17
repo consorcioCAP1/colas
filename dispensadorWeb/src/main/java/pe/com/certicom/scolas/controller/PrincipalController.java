@@ -31,7 +31,7 @@ import pe.com.certicom.scolas.util.FechasUtil;
 
 @Component
 @Scope("view")
-public class PrincipalController extends BaseController implements SerialPortEventListener{
+public class PrincipalController extends BaseController {
 
 	private static final Logger LOGGER = Logger.getLogger(PrincipalController.class);
 
@@ -83,132 +83,9 @@ public class PrincipalController extends BaseController implements SerialPortEve
 			
 		}	
 		
-	public void metodo(){
-		 try {	
-			 
-			Enumeration e = CommPortIdentifier.getPortIdentifiers();
-            Boolean puerto3=false;
-            
-            
-            while(e.hasMoreElements()){
-                CommPortIdentifier p = (CommPortIdentifier)e.nextElement();   
-                System.out.println("Puerto encontrado, nombre:"+p.getName());
-                if(p.getName().equals("COM3")){
-                	puerto3=true;
-                }
-            } 
-			if(puerto3){           
-				if ( CommPortIdentifier.getPortIdentifier("COM3") != null ){					
-						// open serial port
-					 	System.out.println("Trantando de obtener puerto con identificador:"+"COM3");
-					 	
-					 	puertoCOMIdentifier=null;		        
-				        puertoCOMIdentifier = CommPortIdentifier.getPortIdentifier("COM3");
-				        System.out.println("Puerto:"+"COM3"+", obtenido...");
-				        if(puertoSerial==null){        
-					        puertoSerial = (SerialPort) puertoCOMIdentifier.open("ComPort", 2000);
-				        
-					        // get serial input stream
-						   System.out.println("Obteniendo flujo de salida del puerto serial...");
-					        flujoDataScanner = puertoSerial.getInputStream();
-					        System.out.println("Flujo de salida obtenido.");
-				   
-					        // add an event listener on the port
-					        System.out.println("Intentando agregar un listen-er al puerto serial...");
-					        puertoSerial.addEventListener(this);
-					        System.out.println("Listener en puerto serial agregado.");			   
-			
-					        puertoSerial.notifyOnDataAvailable(true);
-					 	} 
-				  //	renderDni=true;
-				        setRenderMensajeScanner(true);
-				    mostrarBotonScanner=false;
-				    mostrarRegresarInicio=false;
-				 
-				    FacesContext.getCurrentInstance().addMessage(null,
-							 new FacesMessage(FacesMessage.SEVERITY_WARN,ScolasCommonConstants.TIPO_MENSAJE_INFORMACION,ScolasCommonConstants.MSG_MENSAJE_ESCANEAR));  
-
-				 	}
-				}
-			
-				else {
-					 FacesContext.getCurrentInstance().addMessage(null,
-							 new FacesMessage(FacesMessage.SEVERITY_WARN,ScolasCommonConstants.TIPO_MENSAJE_INFORMACION,ScolasCommonConstants.MSG_ESCANNER_DESCONECTADO));  
-					}
-				
-			} catch (NoSuchPortException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (TooManyListenersException e) {
-		        System.out.println("Ocurrió una excepción al agregar un listener al puerto serial...");
-		        e.printStackTrace();
-		       
-		    } catch (IOException e) {
-		        System.out.println("Ocurrió una excepción al obtener el flujo de salida...");
-		        e.printStackTrace();
-		       
-		   	} catch (Exception e) {
-		        System.out.println("Ocurrió una excepción al abrir el puerto...");
-		        e.printStackTrace();
-		      
-		    }
-		 
-		}
 
 
-	    /**
-	     * Ejecutado cada vez que se lee un código de barras y además la pantalla
-	     * de solicitud lectura está visible
-	     */
-	public void serialEvent(SerialPortEvent event) {
-	        System.out.println("Data leída desde el scanner, tipo de evento:"+event.getEventType()+".");
-	        if (event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
-	            System.out.println("Data disponible, empezando a leerla...");
-	            
-	                StringBuilder stringDataScanner = new StringBuilder();
-	                int c;
-	                try {
-	                    // append the scanned data onto a string builder
-	                    System.out.println("Iniciando lectura desde el buffer....");
-	                    while (flujoDataScanner.available()>0){
-	                        c = flujoDataScanner.read();
-	                        stringDataScanner.append((char) c);
-	                    }
-
-	                    // cerramos el flujo de datos del scanner
-	                    flujoDataScanner.close();
-
-	                    System.out.println("Lectura terminada, cadena recibida:" + stringDataScanner.toString());
-	                    
-	                    
-	                    String dni1 = "";
-	    	    		String nombreCompleto1 = "";
-	    		    		if(stringDataScanner.toString()!=null && stringDataScanner.toString().length()>140){
-	    			            dni1 = stringDataScanner.toString().substring(2,10);
-	    			            System.out.println("DNI:*"+dni1+"*");
-	    			            String primerApellido = stringDataScanner.toString().substring(10,50);
-	    			            System.out.println("Primer Apellido:*"+primerApellido+"*");
-	    			            String segundoApellido = stringDataScanner.toString().substring(50,90);
-	    			            System.out.println("Segundo Apellido:*"+segundoApellido+"*");
-	    			            String nombres = stringDataScanner.toString().substring(90,125);
-	    			            System.out.println("Nombres:*"+nombres+"*");
-	    			            nombreCompleto1 = nombres.trim()+" "+primerApellido.trim()+" "+segundoApellido.trim();
-	    			           
-	    			            //puertoCOMIdentifier.removePortOwnershipListener((CommPortOwnershipListener) this);
-	    			            puertoSerial.removeEventListener();	    			            
-	    			            puertoSerial.close();
-	    			            setNombreCompleto(nombreCompleto1);
-	    			            setDni(dni1);
-	    			            setDniPrueba(dni1);
-	    		    		}
-	                    
-	                } catch (IOException e) {
-	                    System.out.println("Ocurrió una excepción al leer el flujo de datos desde el scanner...");
-	                    e.printStackTrace();
-	                }	           
-	                
-	        }
-	    }    
+ 
 	  
 	public void regresar(){
 		
@@ -238,27 +115,7 @@ public class PrincipalController extends BaseController implements SerialPortEve
 		}
 	}
 	
-	public void redirectLector(){		
-		
-	try {
-			String dni2 = getDni(); 
-			
-		
-			if (getDniPrueba()!=null && getNombreCompleto()!=null)
-				{	
-				
-					dni2 = getDniPrueba(); 
-					String nombre2= getNombreCompleto();			
-					FacesUtil.setObjectSession("dni2", dni2);
-					FacesUtil.setObjectSession("nombre", nombre2);
-					FacesUtil.redirect(ScolasCommonConstants.XHTML_PRINCIPAL2);		
-				}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	
-	}
 
 	public void redirectAceptar(){		
 	

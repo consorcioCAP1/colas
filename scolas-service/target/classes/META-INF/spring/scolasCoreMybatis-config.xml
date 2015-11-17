@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>	    
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/UsuarioMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/AlarmasMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/PesoMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/PerfilMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/TurnosMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/UsuarioPerfilMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/VentanillaMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/TipoAtencionMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/TipoTicketMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/view/ListarUsuarioMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/TicketMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/ClientesOnpMapper.xml"/>
+		 <mapper resource="pe/com/certicom/scolas/model/mybatis/sqlMapper/TextoTicketMapper.xml"/>
+		 
+		 
+	</mappers>
+</configuration> 

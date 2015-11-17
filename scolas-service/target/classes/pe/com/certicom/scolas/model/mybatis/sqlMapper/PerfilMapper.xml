@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pe.com.certicom.scolas.model.mybatis.dao.PerfilMapper" >
+  <resultMap id="BaseResultMap" type="pe.com.certicom.scolas.model.beans.Perfil" >
+    <id column="id_perfil" property="idPerfil" jdbcType="SMALLINT" />
+    <result column="codigo" property="codigo" jdbcType="NVARCHAR" />
+    <result column="descripcion" property="descripcion" jdbcType="NVARCHAR" />
+    <result column="nombre" property="nombre" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_perfil, codigo, descripcion, nombre
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PERFIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from PERFIL
+    where id_perfil = #{idPerfil,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from PERFIL
+    where id_perfil = #{idPerfil,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="pe.com.certicom.scolas.model.beans.Perfil" >
+    insert into PERFIL (id_perfil, codigo, descripcion, 
+      nombre)
+    values (#{idPerfil,jdbcType=SMALLINT}, #{codigo,jdbcType=NVARCHAR}, #{descripcion,jdbcType=NVARCHAR}, 
+      #{nombre,jdbcType=NVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.Perfil" >
+    insert into PERFIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idPerfil != null" >
+        id_perfil,
+      </if>
+      <if test="codigo != null" >
+        codigo,
+      </if>
+      <if test="descripcion != null" >
+        descripcion,
+      </if>
+      <if test="nombre != null" >
+        nombre,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idPerfil != null" >
+        #{idPerfil,jdbcType=SMALLINT},
+      </if>
+      <if test="codigo != null" >
+        #{codigo,jdbcType=NVARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.Perfil" >
+    update PERFIL
+    <set >
+      <if test="codigo != null" >
+        codigo = #{codigo,jdbcType=NVARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        descripcion = #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="nombre != null" >
+        nombre = #{nombre,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where id_perfil = #{idPerfil,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pe.com.certicom.scolas.model.beans.Perfil" >
+    update PERFIL
+    set codigo = #{codigo,jdbcType=NVARCHAR},
+      descripcion = #{descripcion,jdbcType=NVARCHAR},
+      nombre = #{nombre,jdbcType=NVARCHAR}
+    where id_perfil = #{idPerfil,jdbcType=SMALLINT}
+  </update>
+</mapper>
