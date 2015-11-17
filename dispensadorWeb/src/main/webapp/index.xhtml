@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+ 
+	<title>DISPENSADOR WEB</title>
+
+
+   
+</h:head>
+
+
+<h:form prependId="false">
+	<div >
+		<div style="margin: 10px 0 30px; text-align: center; clear: both;">
+							
+		</div>
+	
+		<div >
+			<div  align="center"  style="HEIGHT: 65px" class="content" >
+				
+	        	<p:panel id="panel" header="GENERADOR DE TICKETS" style="WIDTH:800px; float:center" >
+	        	
+	    			<h:panelGrid columns="3" >		    		
+			    				    		
+			    		<p:commandButton  action="#{inicioController.redirect('1')}" value="Apoderado" 
+			    		style="width:200px;height:400px">
+			    		  
+			    		</p:commandButton>	
+			    		
+			    		<p:commandButton  action="#{inicioController.redirect('2')}"   value="Titular" 
+			    		style="width:200px;height:400px">
+			    		   
+			    		</p:commandButton>	
+			    		
+			    		<p:commandButton  action="#{inicioController.redirect('3')}" value="Tercero" 
+			    		style="width:200px;height:400px">
+			    		   
+			    		</p:commandButton>		
+		    		
+		    		</h:panelGrid>  
+		    				
+ 	      	 	</p:panel>
+        		
+        	</div>
+       	</div>
+      </div>
+        
+ 
+    </h:form>
+
+</html>

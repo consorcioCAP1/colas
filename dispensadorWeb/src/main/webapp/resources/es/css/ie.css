@@ -1,0 +1,195 @@
+.button {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFEFF1F2')
+}
+.button:visited {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFEFF1F2')
+}
+.button:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFE4E7E9')
+}
+.button:active {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFE0E4E6',endColorstr='#FFEFF1F2')
+}
+.default.button {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF74C5F6',endColorstr='#FF227FDF'); BACKGROUND-COLOR: #227fdf
+}
+.default.button:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF74C5F6',endColorstr='#FF1D72CA')
+}
+.default.button:active {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF1D72CA',endColorstr='#FF55B4F4')
+}
+.highlight.button {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF8AC835',endColorstr='#FF5DA206')
+}
+.highlight.button:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF8AC835',endColorstr='#FF4F8905')
+}
+.control.button {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFABAEB1',endColorstr='#FF72787D')
+}
+.control.button:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFABAEB1',endColorstr='#FF6B7075')
+}
+.control.button:active {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF565A5F',endColorstr='#FF5D6267')
+}
+.blue.button {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFC5DFF7',endColorstr='#FFA5CFF2')
+}
+.facebook.button {
+	FILTER: none
+}
+.controls A {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFABAEB1',endColorstr='#FF72787D')
+}
+.controls.toolbar A {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFABAEB1',endColorstr='#FF72787D')
+}
+.controls A:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFABAEB1',endColorstr='#FF6B7075')
+}
+.controls.toolbar A:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFABAEB1',endColorstr='#FF6B7075')
+}
+.controls A:active {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF565A5F',endColorstr='#FF5D6267')
+}
+.controls.toolbar A:active {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF565A5F',endColorstr='#FF5D6267')
+}
+.dialog .tabs LI A {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFEFF1F2')
+}
+.dialog .tabs LI.selected A {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF74C5F6',endColorstr='#FF227FDF')
+}
+.mmbar {
+	BACKGROUND: url(MindMeister3_archivos/bg_header_ie.png) repeat-x
+}
+#messagebar .message {
+	BORDER-BOTTOM: #d5eafc 1px solid; BORDER-LEFT: #d5eafc 1px solid; BACKGROUND-COLOR: #cde5fc; BORDER-TOP: #d5eafc 1px solid; BORDER-RIGHT: #d5eafc 1px solid
+}
+.date.popover TD.today {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFA3A5A5',endColorstr='#FFE0E4E6')
+}
+.slider .handle {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFCED0D3')
+}
+.switch {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFCED0D3',endColorstr='#FFE0E4E6')
+}
+.on.switch {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF3995DA',endColorstr='#FF55B4F4')
+}
+.switch .knob {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFF5F6F7')
+}
+.control.switch {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF3E4245',endColorstr='#FF565B5E')
+}
+.on.control.switch {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF3E4245',endColorstr='#FF565B5E')
+}
+.control.switch .knob {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF9DA2A6',endColorstr='#FF898F94')
+}
+.tokenizer .token {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF74C5F6',endColorstr='#FF227FDF')
+}
+.toolbar A {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFEFF1F2')
+}
+.toolbar A:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFCED0D3')
+}
+.toolbar A:active {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFE0E4E6',endColorstr='#FFEFF1F2')
+}
+.toolbar A.selected {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF227FDF',endColorstr='#FF74C5F6')
+}
+.toolbar A.selected:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF227FDF',endColorstr='#FF74C5F6')
+}
+.toolbar A.selected:visited {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF227FDF',endColorstr='#FF74C5F6')
+}
+.toolbar A.selected:active {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF227FDF',endColorstr='#FF74C5F6')
+}
+.toolbar A.advanced {
+	FILTER: none
+}
+.toolbar .search .clearer {
+	FILTER: none
+}
+#iconbar A.disabled {
+	COLOR: #a4b2bc
+}
+#maps_body .unavailable .entity {
+	FILTER: progid:DXImageTransform.Microsoft.Alpha(Opacity=80)
+}
+#maps_body .unavailable .updated_at {
+	FILTER: progid:DXImageTransform.Microsoft.Alpha(Opacity=80)
+}
+#maps_body .unavailable .meta {
+	FILTER: progid:DXImageTransform.Microsoft.Alpha(Opacity=80)
+}
+.b-ie8 .btn_remove_image {
+	BACKGROUND: #a3a5a5 no-repeat 0px -1316px; HEIGHT: 20px
+}
+#footerbar {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF52575C',endColorstr='#FF7C8287')
+}
+#footer .sep {
+	
+}
+#header .sep {
+	
+}
+#sidebar .note {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFEF07F',endColorstr='#FFFCD02D')
+}
+#sidebar #note_content_ifr {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFEF07F',endColorstr='#FFFCD02D')
+}
+#sidebar .plain.popover #subsection_image {
+	WIDTH: 204px
+}
+#rvspeed .track {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF404447',endColorstr='#FF54585C')
+}
+FIELDSET INPUT[type='radio'] {
+	MARGIN: 7px 0px 0px
+}
+#header .upgrade.tag {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF6EB8EF',endColorstr='#FF56ACED')
+}
+#header .upgrade.tag:hover {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FF85C3F2',endColorstr='#FF56ACED')
+}
+.mmbar .free.tag {
+	MARGIN-TOP: 6px; DISPLAY: block
+}
+.mmbar .upgrade.tag {
+	DISPLAY: block
+}
+.listing .search.head {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFF7F8F9',endColorstr='#FFEFF1F2')
+}
+#content .navigation {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFFFFFFF',endColorstr='#FFE8F4FD')
+}
+DIV.intro {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFF6FAFD',endColorstr='#FFDDEEFB')
+}
+#content .gradient.body {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#FFE0EFFB',endColorstr='#FFFFFFFF')
+}
+.view .active.plans {
+	BORDER-BOTTOM: #2680cf 1px solid; BORDER-LEFT: #2680cf 1px solid; BORDER-TOP: #2680cf 1px solid; BORDER-RIGHT: #2680cf 1px solid
+}
+.highlighted.plans {
+	BORDER-BOTTOM: #2680cf 1px solid; BORDER-LEFT: #2680cf 1px solid; BORDER-TOP: #2680cf 1px solid; BORDER-RIGHT: #2680cf 1px solid
+}

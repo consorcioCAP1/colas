@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pe.com.certicom.scolas.model.mybatis.dao.AlarmasMapper" >
+  <resultMap id="BaseResultMap" type="pe.com.certicom.scolas.model.beans.Alarmas" >
+    <id column="id_alarmas" property="idAlarmas" jdbcType="INTEGER" />
+    <result column="Nombre" property="nombre" jdbcType="NVARCHAR" />
+    <result column="Descripcion" property="descripcion" jdbcType="NVARCHAR" />
+    <result column="Num_Parametros" property="numParametros" jdbcType="SMALLINT" />
+    <result column="Parametro1" property="parametro1" jdbcType="NVARCHAR" />
+    <result column="Parametro2" property="parametro2" jdbcType="NVARCHAR" />
+    <result column="Parametro3" property="parametro3" jdbcType="NVARCHAR" />
+    <result column="Parametro4" property="parametro4" jdbcType="NVARCHAR" />
+    <result column="Parametro5" property="parametro5" jdbcType="NVARCHAR" />
+    <result column="Codigo" property="codigo" jdbcType="NVARCHAR" />
+    <result column="Tiene_SubAlarmas" property="tieneSubalarmas" jdbcType="NVARCHAR" />
+    <result column="ind_iniciado" property="indIniciado" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_alarmas, Nombre, Descripcion, Num_Parametros, Parametro1, Parametro2, Parametro3, 
+    Parametro4, Parametro5, Codigo, Tiene_SubAlarmas, ind_iniciado
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ALARMAS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ALARMAS
+    where id_alarmas = #{idAlarmas,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ALARMAS
+    where id_alarmas = #{idAlarmas,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pe.com.certicom.scolas.model.beans.Alarmas" >
+    insert into ALARMAS (id_alarmas, Nombre, Descripcion, 
+      Num_Parametros, Parametro1, Parametro2, 
+      Parametro3, Parametro4, Parametro5, 
+      Codigo, Tiene_SubAlarmas, ind_iniciado
+      )
+    values (#{idAlarmas,jdbcType=INTEGER}, #{nombre,jdbcType=NVARCHAR}, #{descripcion,jdbcType=NVARCHAR}, 
+      #{numParametros,jdbcType=SMALLINT}, #{parametro1,jdbcType=NVARCHAR}, #{parametro2,jdbcType=NVARCHAR}, 
+      #{parametro3,jdbcType=NVARCHAR}, #{parametro4,jdbcType=NVARCHAR}, #{parametro5,jdbcType=NVARCHAR}, 
+      #{codigo,jdbcType=NVARCHAR}, #{tieneSubalarmas,jdbcType=NVARCHAR}, #{indIniciado,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.Alarmas" >
+    insert into ALARMAS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idAlarmas != null" >
+        id_alarmas,
+      </if>
+      <if test="nombre != null" >
+        Nombre,
+      </if>
+      <if test="descripcion != null" >
+        Descripcion,
+      </if>
+      <if test="numParametros != null" >
+        Num_Parametros,
+      </if>
+      <if test="parametro1 != null" >
+        Parametro1,
+      </if>
+      <if test="parametro2 != null" >
+        Parametro2,
+      </if>
+      <if test="parametro3 != null" >
+        Parametro3,
+      </if>
+      <if test="parametro4 != null" >
+        Parametro4,
+      </if>
+      <if test="parametro5 != null" >
+        Parametro5,
+      </if>
+      <if test="codigo != null" >
+        Codigo,
+      </if>
+      <if test="tieneSubalarmas != null" >
+        Tiene_SubAlarmas,
+      </if>
+      <if test="indIniciado != null" >
+        ind_iniciado,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idAlarmas != null" >
+        #{idAlarmas,jdbcType=INTEGER},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=NVARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="numParametros != null" >
+        #{numParametros,jdbcType=SMALLINT},
+      </if>
+      <if test="parametro1 != null" >
+        #{parametro1,jdbcType=NVARCHAR},
+      </if>
+      <if test="parametro2 != null" >
+        #{parametro2,jdbcType=NVARCHAR},
+      </if>
+      <if test="parametro3 != null" >
+        #{parametro3,jdbcType=NVARCHAR},
+      </if>
+      <if test="parametro4 != null" >
+        #{parametro4,jdbcType=NVARCHAR},
+      </if>
+      <if test="parametro5 != null" >
+        #{parametro5,jdbcType=NVARCHAR},
+      </if>
+      <if test="codigo != null" >
+        #{codigo,jdbcType=NVARCHAR},
+      </if>
+      <if test="tieneSubalarmas != null" >
+        #{tieneSubalarmas,jdbcType=NVARCHAR},
+      </if>
+      <if test="indIniciado != null" >
+        #{indIniciado,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.Alarmas" >
+    update ALARMAS
+    <set >
+      <if test="nombre != null" >
+        Nombre = #{nombre,jdbcType=NVARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        Descripcion = #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="numParametros != null" >
+        Num_Parametros = #{numParametros,jdbcType=SMALLINT},
+      </if>
+      <if test="parametro1 != null" >
+        Parametro1 = #{parametro1,jdbcType=NVARCHAR},
+      </if>
+      <if test="parametro2 != null" >
+        Parametro2 = #{parametro2,jdbcType=NVARCHAR},
+      </if>
+      <if test="parametro3 != null" >
+        Parametro3 = #{parametro3,jdbcType=NVARCHAR},
+      </if>
+      <if test="parametro4 != null" >
+        Parametro4 = #{parametro4,jdbcType=NVARCHAR},
+      </if>
+      <if test="parametro5 != null" >
+        Parametro5 = #{parametro5,jdbcType=NVARCHAR},
+      </if>
+      <if test="codigo != null" >
+        Codigo = #{codigo,jdbcType=NVARCHAR},
+      </if>
+      <if test="tieneSubalarmas != null" >
+        Tiene_SubAlarmas = #{tieneSubalarmas,jdbcType=NVARCHAR},
+      </if>
+      <if test="indIniciado != null" >
+        ind_iniciado = #{indIniciado,jdbcType=CHAR},
+      </if>
+    </set>
+    where id_alarmas = #{idAlarmas,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pe.com.certicom.scolas.model.beans.Alarmas" >
+    update ALARMAS
+    set Nombre = #{nombre,jdbcType=NVARCHAR},
+      Descripcion = #{descripcion,jdbcType=NVARCHAR},
+      Num_Parametros = #{numParametros,jdbcType=SMALLINT},
+      Parametro1 = #{parametro1,jdbcType=NVARCHAR},
+      Parametro2 = #{parametro2,jdbcType=NVARCHAR},
+      Parametro3 = #{parametro3,jdbcType=NVARCHAR},
+      Parametro4 = #{parametro4,jdbcType=NVARCHAR},
+      Parametro5 = #{parametro5,jdbcType=NVARCHAR},
+      Codigo = #{codigo,jdbcType=NVARCHAR},
+      Tiene_SubAlarmas = #{tieneSubalarmas,jdbcType=NVARCHAR},
+      ind_iniciado = #{indIniciado,jdbcType=CHAR}
+    where id_alarmas = #{idAlarmas,jdbcType=INTEGER}
+  </update>
+</mapper>

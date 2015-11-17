@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/pages/facelets/templates/template.xhtml"
+	>
+
+
+<ui:define name="body">	
+	<script type="text/javascript">
+	function onKeyPressNumbers(e)
+		{
+		   var key = window.event ? e.keyCode : e.which;
+		   var keychar = String.fromCharCode(key);
+		   reg = /\D/;
+		   return !reg.test(keychar);
+		}
+
+	
+	</script>
+
+	<h:form  id="formPrincipal">
+		<div  style="HEIGHT: 120px" class="content" >					
+          	 <p:messages id="messages" showDetail="false"  closable="true" style="WIDTH:350px; float:center" />
+	      	 <p:panel id="panel2"  >		        	
+    				<p:panel id="panel1"  header="Consulta de Datos"> 
+	    				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					        <p:outputLabel for="tipoDocumento" value="Tipo Documento:" />
+					        <h:selectOneRadio id="tipoDocumento" value="#{principalController.tipoDocumento}">
+					            <f:selectItem itemLabel="DNI" itemValue="1" />
+					            <f:selectItem itemLabel="CE" itemValue="2" />
+					            <f:selectItem itemLabel="Pasaporte" itemValue="3" />
+					            <f:selectItem itemLabel="CDI" itemValue="4" />
+					            <f:selectItem itemLabel="S/I" itemValue="5" />
+					              
+					        </h:selectOneRadio>
+						   </h:panelGrid>
+	    				
+	    				<h:panelGrid columns="2">
+		    				<p:outputLabel value="N° de documento:"></p:outputLabel>
+		    				<p:inputText value="#{principalController.numeroDocumento}" 
+		    				 onkeypress="return onKeyPressNumbers(event);" ></p:inputText>
+		      	 		</h:panelGrid>
+		      	 		
+		      	 		<br></br>
+		      	 		
+		      	 		<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					        <p:outputLabel for="cliente" value="¿para quien es el servicio?" />
+					        <h:selectOneRadio id="cliente" value="#{principalController.cliente}">
+					            <f:selectItem itemLabel="Titular" itemValue="1" />
+					            <f:selectItem itemLabel="Rep Legal" itemValue="2" />
+					            <f:selectItem itemLabel="Tercero" itemValue="3" />
+					            <p:ajax update="panelGridEmpresas messages panelGridDatos" listener="#{principalController.buscarRepreLegal()}"/>           
+					         
+					         </h:selectOneRadio>
+						 </h:panelGrid>
+	    				
+	    				<h:panelGrid columns="4">
+		    				<p:outputLabel value="N° de RUC:"></p:outputLabel>
+		    				<p:inputText value="#{principalController.numeroRuc}"
+		    				onkeypress="return onKeyPressNumbers(event);"></p:inputText>
+		    				<p:outputLabel value="N° de RUC:"></p:outputLabel>
+		    				<p:commandButton value="Buscar" action="#{principalController.buscarRuc}" update="panelGridEmpresas messages panelGridDatos"></p:commandButton>
+		      	 		</h:panelGrid>
+	      	 		</p:panel>
+		      	 	 <h:panelGrid id="panelGridEmpresas">
+				      	 <p:panel header="Datos encontrados" id="panelEmpresas" rendered="#{principalController.mostrarRadio}">
+				      	 	<h:panelGrid columns="2">
+					      	 	<p:outputLabel for="empresas" value="Seleccionar Empresa:" />
+						        <p:selectOneRadio id="empresas" value="#{principalController.empresaSeleccionada}" >
+						            <f:selectItems  value="#{principalController.lstItem}" ></f:selectItems>		
+						            <p:ajax update="panelGridEmpresas messages panelGridDatos" listener="#{principalController.cargarTicketLista()}"/>           
+						  		 </p:selectOneRadio>	
+						  		 	
+						  		 <p:commandButton value="seleccionar" action="#{principalController.cargarTicketLista()}" update="panelGridEmpresas messages panelGridDatos"></p:commandButton>
+					  		 </h:panelGrid>	
+					  		 	      	 
+				      	 </p:panel>
+			      	 </h:panelGrid>
+	      	 		 <h:panelGrid id="panelGridDatos">
+				      	 <p:panel header="Datos Cliente" id="panelDatos" rendered="#{principalController.mostrarDatos}">
+				      	 	<h:panelGrid columns="2">
+					      	 	 <p:outputLabel value="Nombre Ciudad:" />
+						       	 <p:outputLabel value="#{principalController.ticketBean.ubigeoDescripcion}" />
+						       	 
+						       	 <p:outputLabel value="RUC:" />
+						       	 <p:outputLabel value="#{principalController.ticketBean.ruc}" />
+						       	 
+						       	 <p:outputLabel value="Nombre Empresa:" />
+						       	 <p:outputLabel value="#{principalController.ticketBean.nombrePersona}"/>
+						        
+						         <p:outputLabel value="Condicion Domicilio:" />
+						       	 <p:outputLabel value="#{principalController.ticketBean.condicionDomicilio}" />
+						       	
+						       	 <p:outputLabel value="Restrincion Domicilio:" />
+						       	 <p:outputLabel value="#{principalController.ticketBean.codRestricDomicilio}" />
+						       	 
+						       	 <p:outputLabel value="Estado del Controbuyente:" />
+						       	 <p:outputLabel value="#{principalController.ticketBean.estadoContribuyente}" />
+						       	
+						       	 <p:outputLabel value="Dependencia:" />
+						       	 <p:outputLabel value="#{principalController.ticketBean.nombreDependencia}" />
+					       </h:panelGrid>
+					       
+					       <br/>
+					       <h:panelGrid>
+					       		<p:commandButton value="Seleccionar Ticket" action="#{principalController.seleccionarTicket}"></p:commandButton>
+					       		
+					       		
+					       </h:panelGrid>
+					             	 
+				      	 </p:panel>
+			      	 </h:panelGrid>
+	      	 		
+	      	  	
+						      	 	
+	      	 </p:panel>
+	      	
+	      	 <p:resizable for="panel2" />
+	      	 
+	      	 
+	      	      		
+       	</div>	        
+
+		 
+
+    </h:form>
+
+	
+</ui:define>		
+</ui:composition>
+

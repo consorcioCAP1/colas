@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+	<h:panelGrid >		
+		<h:panelGrid columns="1" >
+			<h:graphicImage id="image" alt="Certicom"
+				value="#{resource['images:logocerticom.gif']}" width="40"
+				style="padding: 0px 0px 0px 5px" >
+			</h:graphicImage>
+		</h:panelGrid>
+		<h:panelGrid columns="2"  style="right: 0px; position: absolute; top: 0px">
+			
+			<p:commandButton value="Cerrar Sesi&oacute;n" 
+			action="#{loginController.logout}" icon="ui-icon-close" style="float:right;"/>	
+		</h:panelGrid>	
+	</h:panelGrid>	
+</ui:composition>
+	

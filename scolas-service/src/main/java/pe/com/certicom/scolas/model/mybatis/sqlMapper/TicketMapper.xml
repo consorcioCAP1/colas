@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pe.com.certicom.scolas.model.mybatis.dao.TicketMapper" >
+  <resultMap id="BaseResultMap" type="pe.com.certicom.scolas.model.beans.Ticket" >
+    <id column="id_ticket" property="idTicket" jdbcType="INTEGER" />
+    <result column="fecha" property="fecha" jdbcType="TIMESTAMP" />
+    <result column="id_tipo_ticket" property="idTipoTicket" jdbcType="INTEGER" />
+    <result column="orden" property="orden" jdbcType="INTEGER" />
+   <result column="nombre_cliente" property="nombreCliente" jdbcType="NVARCHAR" />
+    <result column="hora_emision" property="horaEmision" jdbcType="TIMESTAMP" />
+    <result column="hora_asignacion" property="horaAsignacion" jdbcType="TIMESTAMP" />
+    <result column="hora_inicio_atencion" property="horaInicioAtencion" jdbcType="TIMESTAMP" />
+    <result column="hora_fin_atencion" property="horaFinAtencion" jdbcType="TIMESTAMP" />
+    <result column="id_estado" property="idEstado" jdbcType="INTEGER" />
+    <result column="id_ventanilla" property="idVentanilla" jdbcType="INTEGER" />
+    <result column="id_usuario" property="idUsuario" jdbcType="INTEGER" />
+    <result column="flag_migracion" property="flagMigracion" jdbcType="NVARCHAR" />
+    <result column="id_boton_encuesta" property="idBotonEncuesta" jdbcType="INTEGER" />
+    <result column="hora_clic_llegada" property="horaClicLlegada" jdbcType="TIMESTAMP" />
+    <result column="prellamado" property="prellamado" jdbcType="TINYINT" />
+    <result column="con_clic_llegada" property="conClicLlegada" jdbcType="TINYINT" />
+    <result column="id_area" property="idArea" jdbcType="INTEGER" />
+    <result column="id_dispensador" property="idDispensador" jdbcType="INTEGER" />
+    <result column="dni" property="dni" jdbcType="NVARCHAR" />
+    <result column="ruc" property="ruc" jdbcType="NVARCHAR" />
+    <result column="hora_rellamada" property="horaRellamada" jdbcType="TIMESTAMP" />
+    <result column="id_ubigeo" property="idUbigeo" jdbcType="INTEGER" />
+    <result column="es_derivado_sector" property="esDerivadoSector" jdbcType="BIT" />
+    <result column="derivado_sector_envia" property="derivadoSectorEnvia" jdbcType="BIT" />
+    <result column="id_tipo_documento" property="idTipoDocumento" jdbcType="INTEGER" />
+    <result column="id_tipo_servicio_ruc" property="idTipoServicioRuc" jdbcType="INTEGER" />
+    <result column="Cod_Condicion_Domicilio" property="codCondicionDomicilio" jdbcType="NVARCHAR" />
+    <result column="Cod_Restric_Domicilio" property="codRestricDomicilio" jdbcType="NVARCHAR" />
+    <result column="cod_estado_contribuyente" property="codEstadoContribuyente" jdbcType="NVARCHAR" />
+    <result column="cod_dependencia" property="codDependencia" jdbcType="NVARCHAR" />
+    <result column="nombre_dependencia" property="nombreDependencia" jdbcType="NVARCHAR" />
+    <result column="razon_social" property="razonSocial" jdbcType="NVARCHAR" />
+    <result column="id_oficina" property="idOficina" jdbcType="INTEGER" />
+    <result column="derivado" property="derivado" jdbcType="BIT" />
+    <result column="Cod_Generado_Cab" property="codGeneradoCab" jdbcType="NVARCHAR" />
+    <result column="nombre_persona" property="nombrePersona" jdbcType="NVARCHAR" />
+    <result column="Condicion_Domicilio" property="condicionDomicilio" jdbcType="NVARCHAR" />
+    <result column="estado_contribuyente" property="estadoContribuyente" jdbcType="NVARCHAR" />
+    <result column="Cod_Expediente" property="codExpediente" jdbcType="NVARCHAR" />
+    <result column="Cod_Solicitud" property="codSolicitud" jdbcType="NVARCHAR" />
+    <result column="es_titular" property="esTitular" jdbcType="BIT" />
+    <result column="Id_Tipo_Ventanilla" property="idTipoVentanilla" jdbcType="INTEGER" />
+    <result column="NumeroTicket" property="numeroticket" jdbcType="VARCHAR" />
+    <result column="es_apoderado" property="esApoderado" jdbcType="BIT" />
+    <result column="es_tercero" property="esTercero" jdbcType="BIT" />
+    <result column="NUM_LLAMADOS" property="numLlamados" jdbcType="INTEGER" />
+    <result column="id_ticket_derreac" property="idTicketDerreac" jdbcType="INTEGER" />
+    <result column="reactivado" property="reactivado" jdbcType="BIT" />
+    <result column="ind_derivado_prioridad" property="indDerivadoPrioridad" jdbcType="CHAR" />
+    <result column="codigo_impresion" property="codigoImpresion" jdbcType="VARCHAR" />
+    <result column="id_precola" property="idPrecola" jdbcType="INTEGER" />
+    <result column="ind_ticket_interno" property="indTicketInterno" jdbcType="CHAR" />
+    <result column="ind_tipo_llamado" property="indTipoLlamado" jdbcType="CHAR" />
+    <result column="Ubigeo" property="ubigeo" jdbcType="VARCHAR" />
+    <result column="FechaNac" property="fechanac" jdbcType="TIMESTAMP" />
+    <result column="UbigeoRUC" property="ubigeoRUC" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_ticket, fecha, id_tipo_ticket, orden, nombre_cliente, hora_emision, hora_asignacion, 
+    hora_inicio_atencion, hora_fin_atencion, id_estado, id_ventanilla, id_usuario, flag_migracion, 
+    id_boton_encuesta, hora_clic_llegada, prellamado, con_clic_llegada, id_area, id_dispensador, 
+    dni, ruc, hora_rellamada, id_ubigeo, es_derivado_sector, derivado_sector_envia, id_tipo_documento, 
+    id_tipo_servicio_ruc, Cod_Condicion_Domicilio, Cod_Restric_Domicilio, cod_estado_contribuyente, 
+    cod_dependencia, nombre_dependencia, razon_social, id_oficina, derivado, Cod_Generado_Cab, 
+    nombre_persona, Condicion_Domicilio, estado_contribuyente, Cod_Expediente, Cod_Solicitud, 
+    es_titular, Id_Tipo_Ventanilla, NumeroTicket, es_apoderado, es_tercero, NUM_LLAMADOS, 
+    id_ticket_derreac, reactivado, ind_derivado_prioridad, codigo_impresion, id_precola, 
+    ind_ticket_interno, ind_tipo_llamado, Ubigeo, FechaNac ,UbigeoRUC
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TICKET
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TICKET
+    where id_ticket = #{idTicket,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TICKET
+    where id_ticket = #{idTicket,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pe.com.certicom.scolas.model.beans.Ticket" >
+    insert into TICKET (id_ticket, fecha, id_tipo_ticket, 
+      orden, nombre_cliente, hora_emision, 
+      hora_asignacion, hora_inicio_atencion, 
+      hora_fin_atencion, id_estado, id_ventanilla, 
+      id_usuario, flag_migracion, id_boton_encuesta, 
+      hora_clic_llegada, prellamado, con_clic_llegada, 
+      id_area, id_dispensador, dni, 
+      ruc, hora_rellamada, id_ubigeo, 
+      es_derivado_sector, derivado_sector_envia, id_tipo_documento, 
+      id_tipo_servicio_ruc, Cod_Condicion_Domicilio, 
+      Cod_Restric_Domicilio, cod_estado_contribuyente, 
+      cod_dependencia, nombre_dependencia, razon_social, 
+      id_oficina, derivado, Cod_Generado_Cab, 
+      nombre_persona, Condicion_Domicilio, estado_contribuyente, 
+      Cod_Expediente, Cod_Solicitud, es_titular, 
+      Id_Tipo_Ventanilla, NumeroTicket, es_apoderado, 
+      es_tercero, NUM_LLAMADOS, id_ticket_derreac, 
+      reactivado, ind_derivado_prioridad, codigo_impresion, 
+      id_precola, ind_ticket_interno, ind_tipo_llamado, 
+      Ubigeo, FechaNac,UbigeoRUC)
+    values (#{idTicket,jdbcType=INTEGER}, #{fecha,jdbcType=TIMESTAMP}, #{idTipoTicket,jdbcType=INTEGER}, 
+      #{orden,jdbcType=INTEGER}, #{nombreCliente,jdbcType=NVARCHAR}, #{horaEmision,jdbcType=TIMESTAMP}, 
+      #{horaAsignacion,jdbcType=TIMESTAMP}, #{horaInicioAtencion,jdbcType=TIMESTAMP}, 
+      #{horaFinAtencion,jdbcType=TIMESTAMP}, #{idEstado,jdbcType=INTEGER}, #{idVentanilla,jdbcType=INTEGER}, 
+      #{idUsuario,jdbcType=INTEGER}, #{flagMigracion,jdbcType=NVARCHAR}, #{idBotonEncuesta,jdbcType=INTEGER}, 
+      #{horaClicLlegada,jdbcType=TIMESTAMP}, #{prellamado,jdbcType=TINYINT}, #{conClicLlegada,jdbcType=TINYINT}, 
+      #{idArea,jdbcType=INTEGER}, #{idDispensador,jdbcType=INTEGER}, #{dni,jdbcType=NVARCHAR}, 
+      #{ruc,jdbcType=NVARCHAR}, #{horaRellamada,jdbcType=TIMESTAMP}, #{idUbigeo,jdbcType=INTEGER}, 
+      #{esDerivadoSector,jdbcType=BIT}, #{derivadoSectorEnvia,jdbcType=BIT}, #{idTipoDocumento,jdbcType=INTEGER}, 
+      #{idTipoServicioRuc,jdbcType=INTEGER}, #{codCondicionDomicilio,jdbcType=NVARCHAR}, 
+      #{codRestricDomicilio,jdbcType=NVARCHAR}, #{codEstadoContribuyente,jdbcType=NVARCHAR}, 
+      #{codDependencia,jdbcType=NVARCHAR}, #{nombreDependencia,jdbcType=NVARCHAR}, #{razonSocial,jdbcType=NVARCHAR}, 
+      #{idOficina,jdbcType=INTEGER}, #{derivado,jdbcType=BIT}, #{codGeneradoCab,jdbcType=NVARCHAR}, 
+      #{nombrePersona,jdbcType=NVARCHAR}, #{condicionDomicilio,jdbcType=NVARCHAR}, #{estadoContribuyente,jdbcType=NVARCHAR}, 
+      #{codExpediente,jdbcType=NVARCHAR}, #{codSolicitud,jdbcType=NVARCHAR}, #{esTitular,jdbcType=BIT}, 
+      #{idTipoVentanilla,jdbcType=INTEGER}, #{numeroticket,jdbcType=VARCHAR}, #{esApoderado,jdbcType=BIT}, 
+      #{esTercero,jdbcType=BIT}, #{numLlamados,jdbcType=INTEGER}, #{idTicketDerreac,jdbcType=INTEGER}, 
+      #{reactivado,jdbcType=BIT}, #{indDerivadoPrioridad,jdbcType=CHAR}, #{codigoImpresion,jdbcType=VARCHAR}, 
+      #{idPrecola,jdbcType=INTEGER}, #{indTicketInterno,jdbcType=CHAR}, #{indTipoLlamado,jdbcType=CHAR}, 
+      #{ubigeo,jdbcType=VARCHAR}, #{fechanac,jdbcType=TIMESTAMP}, #{UbigeoRUC,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.Ticket" >
+   	<selectKey resultType="java.lang.Integer" keyProperty="idTicket" order="AFTER" >
+      SELECT @@IDENTITY
+    </selectKey>
+   
+    insert into TICKET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idTicket != null" >
+        id_ticket,
+      </if>
+      <if test="fecha != null" >
+        fecha,
+      </if>
+      <if test="idTipoTicket != null" >
+        id_tipo_ticket,
+      </if>
+      <if test="orden != null" >
+        orden,
+      </if>
+      <if test="nombreCliente != null" >
+        nombre_cliente,
+      </if>
+      <if test="horaEmision != null" >
+        hora_emision,
+      </if>
+      <if test="horaAsignacion != null" >
+        hora_asignacion,
+      </if>
+      <if test="horaInicioAtencion != null" >
+        hora_inicio_atencion,
+      </if>
+      <if test="horaFinAtencion != null" >
+        hora_fin_atencion,
+      </if>
+      <if test="idEstado != null" >
+        id_estado,
+      </if>
+      <if test="idVentanilla != null" >
+        id_ventanilla,
+      </if>
+      <if test="idUsuario != null" >
+        id_usuario,
+      </if>
+      <if test="flagMigracion != null" >
+        flag_migracion,
+      </if>
+      <if test="idBotonEncuesta != null" >
+        id_boton_encuesta,
+      </if>
+      <if test="horaClicLlegada != null" >
+        hora_clic_llegada,
+      </if>
+      <if test="prellamado != null" >
+        prellamado,
+      </if>
+      <if test="conClicLlegada != null" >
+        con_clic_llegada,
+      </if>
+      <if test="idArea != null" >
+        id_area,
+      </if>
+      <if test="idDispensador != null" >
+        id_dispensador,
+      </if>
+      <if test="dni != null" >
+        dni,
+      </if>
+      <if test="ruc != null" >
+        ruc,
+      </if>
+      <if test="horaRellamada != null" >
+        hora_rellamada,
+      </if>
+      <if test="idUbigeo != null" >
+        id_ubigeo,
+      </if>
+      <if test="esDerivadoSector != null" >
+        es_derivado_sector,
+      </if>
+      <if test="derivadoSectorEnvia != null" >
+        derivado_sector_envia,
+      </if>
+      <if test="idTipoDocumento != null" >
+        id_tipo_documento,
+      </if>
+      <if test="idTipoServicioRuc != null" >
+        id_tipo_servicio_ruc,
+      </if>
+      <if test="codCondicionDomicilio != null" >
+        Cod_Condicion_Domicilio,
+      </if>
+      <if test="codRestricDomicilio != null" >
+        Cod_Restric_Domicilio,
+      </if>
+      <if test="codEstadoContribuyente != null" >
+        cod_estado_contribuyente,
+      </if>
+      <if test="codDependencia != null" >
+        cod_dependencia,
+      </if>
+      <if test="nombreDependencia != null" >
+        nombre_dependencia,
+      </if>
+      <if test="razonSocial != null" >
+        razon_social,
+      </if>
+      <if test="idOficina != null" >
+        id_oficina,
+      </if>
+      <if test="derivado != null" >
+        derivado,
+      </if>
+      <if test="codGeneradoCab != null" >
+        Cod_Generado_Cab,
+      </if>
+      <if test="nombrePersona != null" >
+        nombre_persona,
+      </if>
+      <if test="condicionDomicilio != null" >
+        Condicion_Domicilio,
+      </if>
+      <if test="estadoContribuyente != null" >
+        estado_contribuyente,
+      </if>
+      <if test="codExpediente != null" >
+        Cod_Expediente,
+      </if>
+      <if test="codSolicitud != null" >
+        Cod_Solicitud,
+      </if>
+      <if test="esTitular != null" >
+        es_titular,
+      </if>
+      <if test="idTipoVentanilla != null" >
+        Id_Tipo_Ventanilla,
+      </if>
+      <if test="numeroticket != null" >
+        NumeroTicket,
+      </if>
+      <if test="esApoderado != null" >
+        es_apoderado,
+      </if>
+      <if test="esTercero != null" >
+        es_tercero,
+      </if>
+      <if test="numLlamados != null" >
+        NUM_LLAMADOS,
+      </if>
+      <if test="idTicketDerreac != null" >
+        id_ticket_derreac,
+      </if>
+      <if test="reactivado != null" >
+        reactivado,
+      </if>
+      <if test="indDerivadoPrioridad != null" >
+        ind_derivado_prioridad,
+      </if>
+      <if test="codigoImpresion != null" >
+        codigo_impresion,
+      </if>
+      <if test="idPrecola != null" >
+        id_precola,
+      </if>
+      <if test="indTicketInterno != null" >
+        ind_ticket_interno,
+      </if>
+      <if test="indTipoLlamado != null" >
+        ind_tipo_llamado,
+      </if>
+      <if test="ubigeo != null" >
+        Ubigeo,
+      </if>
+      <if test="fechanac != null" >
+        FechaNac,
+      </if>
+      <if test="ubigeoRUC != null" >
+        UbigeoRUC,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idTicket != null" >
+        #{idTicket,jdbcType=INTEGER},
+      </if>
+      <if test="fecha != null" >
+        #{fecha,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idTipoTicket != null" >
+        #{idTipoTicket,jdbcType=INTEGER},
+      </if>
+      <if test="orden != null" >
+        #{orden,jdbcType=INTEGER},
+      </if>
+      <if test="nombreCliente != null" >
+        #{nombreCliente,jdbcType=NVARCHAR},
+      </if>
+      <if test="horaEmision != null" >
+        #{horaEmision,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horaAsignacion != null" >
+        #{horaAsignacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horaInicioAtencion != null" >
+        #{horaInicioAtencion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horaFinAtencion != null" >
+        #{horaFinAtencion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idEstado != null" >
+        #{idEstado,jdbcType=INTEGER},
+      </if>
+      <if test="idVentanilla != null" >
+        #{idVentanilla,jdbcType=INTEGER},
+      </if>
+      <if test="idUsuario != null" >
+        #{idUsuario,jdbcType=INTEGER},
+      </if>
+      <if test="flagMigracion != null" >
+        #{flagMigracion,jdbcType=NVARCHAR},
+      </if>
+      <if test="idBotonEncuesta != null" >
+        #{idBotonEncuesta,jdbcType=INTEGER},
+      </if>
+      <if test="horaClicLlegada != null" >
+        #{horaClicLlegada,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prellamado != null" >
+        #{prellamado,jdbcType=TINYINT},
+      </if>
+      <if test="conClicLlegada != null" >
+        #{conClicLlegada,jdbcType=TINYINT},
+      </if>
+      <if test="idArea != null" >
+        #{idArea,jdbcType=INTEGER},
+      </if>
+      <if test="idDispensador != null" >
+        #{idDispensador,jdbcType=INTEGER},
+      </if>
+      <if test="dni != null" >
+        #{dni,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruc != null" >
+        #{ruc,jdbcType=NVARCHAR},
+      </if>
+      <if test="horaRellamada != null" >
+        #{horaRellamada,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idUbigeo != null" >
+        #{idUbigeo,jdbcType=INTEGER},
+      </if>
+      <if test="esDerivadoSector != null" >
+        #{esDerivadoSector,jdbcType=BIT},
+      </if>
+      <if test="derivadoSectorEnvia != null" >
+        #{derivadoSectorEnvia,jdbcType=BIT},
+      </if>
+      <if test="idTipoDocumento != null" >
+        #{idTipoDocumento,jdbcType=INTEGER},
+      </if>
+      <if test="idTipoServicioRuc != null" >
+        #{idTipoServicioRuc,jdbcType=INTEGER},
+      </if>
+      <if test="codCondicionDomicilio != null" >
+        #{codCondicionDomicilio,jdbcType=NVARCHAR},
+      </if>
+      <if test="codRestricDomicilio != null" >
+        #{codRestricDomicilio,jdbcType=NVARCHAR},
+      </if>
+      <if test="codEstadoContribuyente != null" >
+        #{codEstadoContribuyente,jdbcType=NVARCHAR},
+      </if>
+      <if test="codDependencia != null" >
+        #{codDependencia,jdbcType=NVARCHAR},
+      </if>
+      <if test="nombreDependencia != null" >
+        #{nombreDependencia,jdbcType=NVARCHAR},
+      </if>
+      <if test="razonSocial != null" >
+        #{razonSocial,jdbcType=NVARCHAR},
+      </if>
+      <if test="idOficina != null" >
+        #{idOficina,jdbcType=INTEGER},
+      </if>
+      <if test="derivado != null" >
+        #{derivado,jdbcType=BIT},
+      </if>
+      <if test="codGeneradoCab != null" >
+        #{codGeneradoCab,jdbcType=NVARCHAR},
+      </if>
+      <if test="nombrePersona != null" >
+        #{nombrePersona,jdbcType=NVARCHAR},
+      </if>
+      <if test="condicionDomicilio != null" >
+        #{condicionDomicilio,jdbcType=NVARCHAR},
+      </if>
+      <if test="estadoContribuyente != null" >
+        #{estadoContribuyente,jdbcType=NVARCHAR},
+      </if>
+      <if test="codExpediente != null" >
+        #{codExpediente,jdbcType=NVARCHAR},
+      </if>
+      <if test="codSolicitud != null" >
+        #{codSolicitud,jdbcType=NVARCHAR},
+      </if>
+      <if test="esTitular != null" >
+        #{esTitular,jdbcType=BIT},
+      </if>
+      <if test="idTipoVentanilla != null" >
+        #{idTipoVentanilla,jdbcType=INTEGER},
+      </if>
+      <if test="numeroticket != null" >
+        #{numeroticket,jdbcType=VARCHAR},
+      </if>
+      <if test="esApoderado != null" >
+        #{esApoderado,jdbcType=BIT},
+      </if>
+      <if test="esTercero != null" >
+        #{esTercero,jdbcType=BIT},
+      </if>
+      <if test="numLlamados != null" >
+        #{numLlamados,jdbcType=INTEGER},
+      </if>
+      <if test="idTicketDerreac != null" >
+        #{idTicketDerreac,jdbcType=INTEGER},
+      </if>
+      <if test="reactivado != null" >
+        #{reactivado,jdbcType=BIT},
+      </if>
+      <if test="indDerivadoPrioridad != null" >
+        #{indDerivadoPrioridad,jdbcType=CHAR},
+      </if>
+      <if test="codigoImpresion != null" >
+        #{codigoImpresion,jdbcType=VARCHAR},
+      </if>
+      <if test="idPrecola != null" >
+        #{idPrecola,jdbcType=INTEGER},
+      </if>
+      <if test="indTicketInterno != null" >
+        #{indTicketInterno,jdbcType=CHAR},
+      </if>
+      <if test="indTipoLlamado != null" >
+        #{indTipoLlamado,jdbcType=CHAR},
+      </if>
+      <if test="ubigeo != null" >
+        #{ubigeo,jdbcType=VARCHAR},
+      </if>
+      <if test="fechanac != null" >
+        #{fechanac,jdbcType=TIMESTAMP},
+      </if>
+       <if test="ubigeoRUC != null" >
+        #{ubigeoRUC,jdbcType=TIMESTAMP},
+      </if>
+      
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.Ticket" >
+    update TICKET
+    <set >
+      <if test="fecha != null" >
+        fecha = #{fecha,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idTipoTicket != null" >
+        id_tipo_ticket = #{idTipoTicket,jdbcType=INTEGER},
+      </if>
+      <if test="orden != null" >
+        orden = #{orden,jdbcType=INTEGER},
+      </if>
+      <if test="nombreCliente != null" >
+        nombre_cliente = #{nombreCliente,jdbcType=NVARCHAR},
+      </if>
+      <if test="horaEmision != null" >
+        hora_emision = #{horaEmision,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horaAsignacion != null" >
+        hora_asignacion = #{horaAsignacion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horaInicioAtencion != null" >
+        hora_inicio_atencion = #{horaInicioAtencion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horaFinAtencion != null" >
+        hora_fin_atencion = #{horaFinAtencion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idEstado != null" >
+        id_estado = #{idEstado,jdbcType=INTEGER},
+      </if>
+      <if test="idVentanilla != null" >
+        id_ventanilla = #{idVentanilla,jdbcType=INTEGER},
+      </if>
+      <if test="idUsuario != null" >
+        id_usuario = #{idUsuario,jdbcType=INTEGER},
+      </if>
+      <if test="flagMigracion != null" >
+        flag_migracion = #{flagMigracion,jdbcType=NVARCHAR},
+      </if>
+      <if test="idBotonEncuesta != null" >
+        id_boton_encuesta = #{idBotonEncuesta,jdbcType=INTEGER},
+      </if>
+      <if test="horaClicLlegada != null" >
+        hora_clic_llegada = #{horaClicLlegada,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prellamado != null" >
+        prellamado = #{prellamado,jdbcType=TINYINT},
+      </if>
+      <if test="conClicLlegada != null" >
+        con_clic_llegada = #{conClicLlegada,jdbcType=TINYINT},
+      </if>
+      <if test="idArea != null" >
+        id_area = #{idArea,jdbcType=INTEGER},
+      </if>
+      <if test="idDispensador != null" >
+        id_dispensador = #{idDispensador,jdbcType=INTEGER},
+      </if>
+      <if test="dni != null" >
+        dni = #{dni,jdbcType=NVARCHAR},
+      </if>
+      <if test="ruc != null" >
+        ruc = #{ruc,jdbcType=NVARCHAR},
+      </if>
+      <if test="horaRellamada != null" >
+        hora_rellamada = #{horaRellamada,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idUbigeo != null" >
+        id_ubigeo = #{idUbigeo,jdbcType=INTEGER},
+      </if>
+      <if test="esDerivadoSector != null" >
+        es_derivado_sector = #{esDerivadoSector,jdbcType=BIT},
+      </if>
+      <if test="derivadoSectorEnvia != null" >
+        derivado_sector_envia = #{derivadoSectorEnvia,jdbcType=BIT},
+      </if>
+      <if test="idTipoDocumento != null" >
+        id_tipo_documento = #{idTipoDocumento,jdbcType=INTEGER},
+      </if>
+      <if test="idTipoServicioRuc != null" >
+        id_tipo_servicio_ruc = #{idTipoServicioRuc,jdbcType=INTEGER},
+      </if>
+      <if test="codCondicionDomicilio != null" >
+        Cod_Condicion_Domicilio = #{codCondicionDomicilio,jdbcType=NVARCHAR},
+      </if>
+      <if test="codRestricDomicilio != null" >
+        Cod_Restric_Domicilio = #{codRestricDomicilio,jdbcType=NVARCHAR},
+      </if>
+      <if test="codEstadoContribuyente != null" >
+        cod_estado_contribuyente = #{codEstadoContribuyente,jdbcType=NVARCHAR},
+      </if>
+      <if test="codDependencia != null" >
+        cod_dependencia = #{codDependencia,jdbcType=NVARCHAR},
+      </if>
+      <if test="nombreDependencia != null" >
+        nombre_dependencia = #{nombreDependencia,jdbcType=NVARCHAR},
+      </if>
+      <if test="razonSocial != null" >
+        razon_social = #{razonSocial,jdbcType=NVARCHAR},
+      </if>
+      <if test="idOficina != null" >
+        id_oficina = #{idOficina,jdbcType=INTEGER},
+      </if>
+      <if test="derivado != null" >
+        derivado = #{derivado,jdbcType=BIT},
+      </if>
+      <if test="codGeneradoCab != null" >
+        Cod_Generado_Cab = #{codGeneradoCab,jdbcType=NVARCHAR},
+      </if>
+      <if test="nombrePersona != null" >
+        nombre_persona = #{nombrePersona,jdbcType=NVARCHAR},
+      </if>
+      <if test="condicionDomicilio != null" >
+        Condicion_Domicilio = #{condicionDomicilio,jdbcType=NVARCHAR},
+      </if>
+      <if test="estadoContribuyente != null" >
+        estado_contribuyente = #{estadoContribuyente,jdbcType=NVARCHAR},
+      </if>
+      <if test="codExpediente != null" >
+        Cod_Expediente = #{codExpediente,jdbcType=NVARCHAR},
+      </if>
+      <if test="codSolicitud != null" >
+        Cod_Solicitud = #{codSolicitud,jdbcType=NVARCHAR},
+      </if>
+      <if test="esTitular != null" >
+        es_titular = #{esTitular,jdbcType=BIT},
+      </if>
+      <if test="idTipoVentanilla != null" >
+        Id_Tipo_Ventanilla = #{idTipoVentanilla,jdbcType=INTEGER},
+      </if>
+      <if test="numeroticket != null" >
+        NumeroTicket = #{numeroticket,jdbcType=VARCHAR},
+      </if>
+      <if test="esApoderado != null" >
+        es_apoderado = #{esApoderado,jdbcType=BIT},
+      </if>
+      <if test="esTercero != null" >
+        es_tercero = #{esTercero,jdbcType=BIT},
+      </if>
+      <if test="numLlamados != null" >
+        NUM_LLAMADOS = #{numLlamados,jdbcType=INTEGER},
+      </if>
+      <if test="idTicketDerreac != null" >
+        id_ticket_derreac = #{idTicketDerreac,jdbcType=INTEGER},
+      </if>
+      <if test="reactivado != null" >
+        reactivado = #{reactivado,jdbcType=BIT},
+      </if>
+      <if test="indDerivadoPrioridad != null" >
+        ind_derivado_prioridad = #{indDerivadoPrioridad,jdbcType=CHAR},
+      </if>
+      <if test="codigoImpresion != null" >
+        codigo_impresion = #{codigoImpresion,jdbcType=VARCHAR},
+      </if>
+      <if test="idPrecola != null" >
+        id_precola = #{idPrecola,jdbcType=INTEGER},
+      </if>
+      <if test="indTicketInterno != null" >
+        ind_ticket_interno = #{indTicketInterno,jdbcType=CHAR},
+      </if>
+      <if test="indTipoLlamado != null" >
+        ind_tipo_llamado = #{indTipoLlamado,jdbcType=CHAR},
+      </if>
+      <if test="ubigeo != null" >
+        Ubigeo = #{ubigeo,jdbcType=VARCHAR},
+      </if>
+      <if test="fechanac != null" >
+        FechaNac = #{fechanac,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ubigeoRUC != null" >
+        UbigeoRUC = #{ubigeoRUC,jdbcType=VARCHAR},
+      </if>
+      
+    </set>
+    where id_ticket = #{idTicket,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pe.com.certicom.scolas.model.beans.Ticket" >
+    update TICKET
+    set fecha = #{fecha,jdbcType=TIMESTAMP},
+      id_tipo_ticket = #{idTipoTicket,jdbcType=INTEGER},
+      orden = #{orden,jdbcType=INTEGER},
+      nombre_cliente = #{nombreCliente,jdbcType=NVARCHAR},
+      hora_emision = #{horaEmision,jdbcType=TIMESTAMP},
+      hora_asignacion = #{horaAsignacion,jdbcType=TIMESTAMP},
+      hora_inicio_atencion = #{horaInicioAtencion,jdbcType=TIMESTAMP},
+      hora_fin_atencion = #{horaFinAtencion,jdbcType=TIMESTAMP},
+      id_estado = #{idEstado,jdbcType=INTEGER},
+      id_ventanilla = #{idVentanilla,jdbcType=INTEGER},
+      id_usuario = #{idUsuario,jdbcType=INTEGER},
+      flag_migracion = #{flagMigracion,jdbcType=NVARCHAR},
+      id_boton_encuesta = #{idBotonEncuesta,jdbcType=INTEGER},
+      hora_clic_llegada = #{horaClicLlegada,jdbcType=TIMESTAMP},
+      prellamado = #{prellamado,jdbcType=TINYINT},
+      con_clic_llegada = #{conClicLlegada,jdbcType=TINYINT},
+      id_area = #{idArea,jdbcType=INTEGER},
+      id_dispensador = #{idDispensador,jdbcType=INTEGER},
+      dni = #{dni,jdbcType=NVARCHAR},
+      ruc = #{ruc,jdbcType=NVARCHAR},
+      hora_rellamada = #{horaRellamada,jdbcType=TIMESTAMP},
+      id_ubigeo = #{idUbigeo,jdbcType=INTEGER},
+      es_derivado_sector = #{esDerivadoSector,jdbcType=BIT},
+      derivado_sector_envia = #{derivadoSectorEnvia,jdbcType=BIT},
+      id_tipo_documento = #{idTipoDocumento,jdbcType=INTEGER},
+      id_tipo_servicio_ruc = #{idTipoServicioRuc,jdbcType=INTEGER},
+      Cod_Condicion_Domicilio = #{codCondicionDomicilio,jdbcType=NVARCHAR},
+      Cod_Restric_Domicilio = #{codRestricDomicilio,jdbcType=NVARCHAR},
+      cod_estado_contribuyente = #{codEstadoContribuyente,jdbcType=NVARCHAR},
+      cod_dependencia = #{codDependencia,jdbcType=NVARCHAR},
+      nombre_dependencia = #{nombreDependencia,jdbcType=NVARCHAR},
+      razon_social = #{razonSocial,jdbcType=NVARCHAR},
+      id_oficina = #{idOficina,jdbcType=INTEGER},
+      derivado = #{derivado,jdbcType=BIT},
+      Cod_Generado_Cab = #{codGeneradoCab,jdbcType=NVARCHAR},
+      nombre_persona = #{nombrePersona,jdbcType=NVARCHAR},
+      Condicion_Domicilio = #{condicionDomicilio,jdbcType=NVARCHAR},
+      estado_contribuyente = #{estadoContribuyente,jdbcType=NVARCHAR},
+      Cod_Expediente = #{codExpediente,jdbcType=NVARCHAR},
+      Cod_Solicitud = #{codSolicitud,jdbcType=NVARCHAR},
+      es_titular = #{esTitular,jdbcType=BIT},
+      Id_Tipo_Ventanilla = #{idTipoVentanilla,jdbcType=INTEGER},
+      NumeroTicket = #{numeroticket,jdbcType=VARCHAR},
+      es_apoderado = #{esApoderado,jdbcType=BIT},
+      es_tercero = #{esTercero,jdbcType=BIT},
+      NUM_LLAMADOS = #{numLlamados,jdbcType=INTEGER},
+      id_ticket_derreac = #{idTicketDerreac,jdbcType=INTEGER},
+      reactivado = #{reactivado,jdbcType=BIT},
+      ind_derivado_prioridad = #{indDerivadoPrioridad,jdbcType=CHAR},
+      codigo_impresion = #{codigoImpresion,jdbcType=VARCHAR},
+      id_precola = #{idPrecola,jdbcType=INTEGER},
+      ind_ticket_interno = #{indTicketInterno,jdbcType=CHAR},
+      ind_tipo_llamado = #{indTipoLlamado,jdbcType=CHAR},
+      Ubigeo = #{ubigeo,jdbcType=VARCHAR},
+      FechaNac = #{fechanac,jdbcType=TIMESTAMP},
+      UbigeoRUC=#{ubigeoRUC,jdbcType=VARCHAR},
+    where id_ticket = #{idTicket,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectMaxOrden" parameterType="pe.com.certicom.scolas.model.beans.Ticket" resultType="java.lang.Integer">
+    SELECT max(t.orden)+1 FROM TICKET t with (READUNCOMMITTED)  
+     WHERE t.id_tipo_ticket =#{idTipoTicket,jdbcType=INTEGER} AND t.fecha = #{fecha,jdbcType=TIMESTAMP} 
+  </select>
+  
+   <select id="updateAletar" statementType="CALLABLE" >
+      exec generarAlertaPorCreacionTicket 
+  </select>
+  
+   	<select id="selectUbigeoByCodigo" parameterType="java.lang.String" resultType="java.lang.String">
+   		 select departamento+'/'+provincia+'/'+distrito from UBIGEO with (READUNCOMMITTED) where Codigo= #{idUbigeo,jdbcType=VARCHAR}      
+	</select>
+  
+  
+  
+</mapper>

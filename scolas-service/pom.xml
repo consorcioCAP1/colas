@@ -1,0 +1,170 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.certicom.scolas</groupId>
+  <artifactId>scolas-service</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>scolas-service</name>
+  <url>http://maven.apache.org</url>
+
+	<properties>
+		<org.springframework.version>3.1.1.RELEASE</org.springframework.version>
+	</properties>
+	  
+  <dependencies>  			
+	   <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-context</artifactId>
+	        <version>3.1.1.RELEASE</version>
+    	</dependency>
+	  		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		
+	  
+	  
+	  <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.6</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- MYBATIS -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+
+		<!-- MYBATIS-SPRING -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<!-- sql dependency   -->	
+			
+		<dependency>
+		    <groupId>com.microsoft.sqlserver</groupId>
+		    <artifactId>sqljdbc4</artifactId>
+		    <version>4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		
+	<!--  spring  test  -->	
+		
+	 <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>3.1.1.RELEASE</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>3.1.1.RELEASE</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>3.1.1.RELEASE</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>3.1.1.RELEASE</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+		<groupId>axis</groupId>
+		<artifactId>axis-jaxrpc</artifactId>
+		<version>1.2.1</version>
+	</dependency>
+			
+  </dependencies>
+	<build>
+		<resources>
+			<resource>
+		    	<directory>src/main/resources</directory>
+		 	</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.0.2</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+
+				<!-- Genera el codigo fuente al hacer un package -->
+				<plugin>
+					<artifactId>maven-source-plugin</artifactId>
+					<configuration>
+						<aggregate>false</aggregate>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- Copia todos los recursos al compilar el proyecto usando maven-ant -->
+				
+<!-- 				JUnit tests ignore the environment variable MAVEN_OPTS, then you must use  SUREFIRE-plugin-->
+				<plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-surefire-plugin</artifactId>
+				  <configuration>
+				    <forkMode>pertest</forkMode>
+				    <argLine>-Xms512m -Xmx512m</argLine>
+				    <testFailureIgnore>false</testFailureIgnore>
+				    <skip>false</skip>
+				  </configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pe.com.certicom.scolas.model.mybatis.dao.DispensadorMapper" >
+  <resultMap id="BaseResultMap" type="pe.com.certicom.scolas.model.beans.Dispensador" >
+    <id column="id_dispensador" property="idDispensador" jdbcType="INTEGER" />
+    <result column="nombre" property="nombre" jdbcType="NVARCHAR" />
+    <result column="descripcion" property="descripcion" jdbcType="NVARCHAR" />
+    <result column="Puerto" property="puerto" jdbcType="INTEGER" />
+    <result column="Velocidad" property="velocidad" jdbcType="INTEGER" />
+    <result column="ind_impresion" property="indImpresion" jdbcType="BIT" />
+    <result column="cod_nivel_menu" property="codNivelMenu" jdbcType="INTEGER" />
+    <result column="id_estado" property="idEstado" jdbcType="BIT" />
+    <result column="num_demora_pantallas" property="numDemoraPantallas" jdbcType="INTEGER" />
+    <result column="fec_ultima_conexion" property="fecUltimaConexion" jdbcType="TIMESTAMP" />
+    <result column="ind_alarma_iniciada" property="indAlarmaIniciada" jdbcType="CHAR" />
+    <result column="generico" property="generico" jdbcType="CHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    "id_dispensador", "nombre", "descripcion", "Puerto", "Velocidad", "ind_impresion", 
+    "cod_nivel_menu", "id_estado", "num_demora_pantallas", "fec_ultima_conexion", "ind_alarma_iniciada", 
+    "generico", "ip"
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from "DISPENSADOR"
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from "DISPENSADOR"
+    where "id_dispensador" = #{idDispensador,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from "DISPENSADOR"
+    where "id_dispensador" = #{idDispensador,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pe.com.certicom.scolas.model.beans.Dispensador" >
+    insert into "DISPENSADOR" ("id_dispensador", "nombre", "descripcion", 
+      "Puerto", "Velocidad", "ind_impresion", 
+      "cod_nivel_menu", "id_estado", "num_demora_pantallas", 
+      "fec_ultima_conexion", "ind_alarma_iniciada", "generico", 
+      "ip")
+    values (#{idDispensador,jdbcType=INTEGER}, #{nombre,jdbcType=NVARCHAR}, #{descripcion,jdbcType=NVARCHAR}, 
+      #{puerto,jdbcType=INTEGER}, #{velocidad,jdbcType=INTEGER}, #{indImpresion,jdbcType=BIT}, 
+      #{codNivelMenu,jdbcType=INTEGER}, #{idEstado,jdbcType=BIT}, #{numDemoraPantallas,jdbcType=INTEGER}, 
+      #{fecUltimaConexion,jdbcType=TIMESTAMP}, #{indAlarmaIniciada,jdbcType=CHAR}, #{generico,jdbcType=CHAR}, 
+      #{ip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.Dispensador" >
+    insert into "DISPENSADOR"
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idDispensador != null" >
+        "id_dispensador",
+      </if>
+      <if test="nombre != null" >
+        "nombre",
+      </if>
+      <if test="descripcion != null" >
+        "descripcion",
+      </if>
+      <if test="puerto != null" >
+        "Puerto",
+      </if>
+      <if test="velocidad != null" >
+        "Velocidad",
+      </if>
+      <if test="indImpresion != null" >
+        "ind_impresion",
+      </if>
+      <if test="codNivelMenu != null" >
+        "cod_nivel_menu",
+      </if>
+      <if test="idEstado != null" >
+        "id_estado",
+      </if>
+      <if test="numDemoraPantallas != null" >
+        "num_demora_pantallas",
+      </if>
+      <if test="fecUltimaConexion != null" >
+        "fec_ultima_conexion",
+      </if>
+      <if test="indAlarmaIniciada != null" >
+        "ind_alarma_iniciada",
+      </if>
+      <if test="generico != null" >
+        "generico",
+      </if>
+      <if test="ip != null" >
+        "ip",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idDispensador != null" >
+        #{idDispensador,jdbcType=INTEGER},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=NVARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="puerto != null" >
+        #{puerto,jdbcType=INTEGER},
+      </if>
+      <if test="velocidad != null" >
+        #{velocidad,jdbcType=INTEGER},
+      </if>
+      <if test="indImpresion != null" >
+        #{indImpresion,jdbcType=BIT},
+      </if>
+      <if test="codNivelMenu != null" >
+        #{codNivelMenu,jdbcType=INTEGER},
+      </if>
+      <if test="idEstado != null" >
+        #{idEstado,jdbcType=BIT},
+      </if>
+      <if test="numDemoraPantallas != null" >
+        #{numDemoraPantallas,jdbcType=INTEGER},
+      </if>
+      <if test="fecUltimaConexion != null" >
+        #{fecUltimaConexion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="indAlarmaIniciada != null" >
+        #{indAlarmaIniciada,jdbcType=CHAR},
+      </if>
+      <if test="generico != null" >
+        #{generico,jdbcType=CHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.Dispensador" >
+    update "DISPENSADOR"
+    <set >
+      <if test="nombre != null" >
+        "nombre" = #{nombre,jdbcType=NVARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        "descripcion" = #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="puerto != null" >
+        "Puerto" = #{puerto,jdbcType=INTEGER},
+      </if>
+      <if test="velocidad != null" >
+        "Velocidad" = #{velocidad,jdbcType=INTEGER},
+      </if>
+      <if test="indImpresion != null" >
+        "ind_impresion" = #{indImpresion,jdbcType=BIT},
+      </if>
+      <if test="codNivelMenu != null" >
+        "cod_nivel_menu" = #{codNivelMenu,jdbcType=INTEGER},
+      </if>
+      <if test="idEstado != null" >
+        "id_estado" = #{idEstado,jdbcType=BIT},
+      </if>
+      <if test="numDemoraPantallas != null" >
+        "num_demora_pantallas" = #{numDemoraPantallas,jdbcType=INTEGER},
+      </if>
+      <if test="fecUltimaConexion != null" >
+        "fec_ultima_conexion" = #{fecUltimaConexion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="indAlarmaIniciada != null" >
+        "ind_alarma_iniciada" = #{indAlarmaIniciada,jdbcType=CHAR},
+      </if>
+      <if test="generico != null" >
+        "generico" = #{generico,jdbcType=CHAR},
+      </if>
+      <if test="ip != null" >
+        "ip" = #{ip,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "id_dispensador" = #{idDispensador,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pe.com.certicom.scolas.model.beans.Dispensador" >
+    update "DISPENSADOR"
+    set "nombre" = #{nombre,jdbcType=NVARCHAR},
+      "descripcion" = #{descripcion,jdbcType=NVARCHAR},
+      "Puerto" = #{puerto,jdbcType=INTEGER},
+      "Velocidad" = #{velocidad,jdbcType=INTEGER},
+      "ind_impresion" = #{indImpresion,jdbcType=BIT},
+      "cod_nivel_menu" = #{codNivelMenu,jdbcType=INTEGER},
+      "id_estado" = #{idEstado,jdbcType=BIT},
+      "num_demora_pantallas" = #{numDemoraPantallas,jdbcType=INTEGER},
+      "fec_ultima_conexion" = #{fecUltimaConexion,jdbcType=TIMESTAMP},
+      "ind_alarma_iniciada" = #{indAlarmaIniciada,jdbcType=CHAR},
+      "generico" = #{generico,jdbcType=CHAR},
+      "ip" = #{ip,jdbcType=VARCHAR}
+    where "id_dispensador" = #{idDispensador,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pe.com.certicom.scolas.model.mybatis.dao.ClientesOnpMapper" >
+  <resultMap id="BaseResultMap" type="pe.com.certicom.scolas.model.beans.ClientesOnp" >
+    <id column="dni" property="dni" jdbcType="CHAR" />
+    <result column="nombres" property="nombres" jdbcType="VARCHAR" />
+    <result column="adicional_2" property="adicional2" jdbcType="VARCHAR" />
+    <result column="adicional_1" property="adicional1" jdbcType="VARCHAR" />
+    <result column="esDniPorLector" property="esDniPorLector" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dni, nombres, adicional_2, adicional_1,esDniPorLector
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from CLIENTES_ONP
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from CLIENTES_ONP
+    where dni = #{dni,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CLIENTES_ONP
+    where dni = #{dni,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="pe.com.certicom.scolas.model.beans.ClientesOnp" >
+    insert into CLIENTES_ONP (dni, nombres, adicional_2, 
+      adicional_1,esDniPorLector)
+    values (#{dni,jdbcType=CHAR}, #{nombres,jdbcType=VARCHAR}, #{adicional2,jdbcType=VARCHAR}, 
+      #{adicional1,jdbcType=VARCHAR},#{esDniPorLector,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.ClientesOnp" >
+    insert into CLIENTES_ONP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dni != null" >
+        dni,
+      </if>
+      <if test="nombres != null" >
+        nombres,
+      </if>
+      <if test="adicional2 != null" >
+        adicional_2,
+      </if>
+      <if test="adicional1 != null" >
+        adicional_1,
+      </if>
+       <if test="esDniPorLector != null" >
+        esDniPorLector,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dni != null" >
+        #{dni,jdbcType=CHAR},
+      </if>
+      <if test="nombres != null" >
+        #{nombres,jdbcType=VARCHAR},
+      </if>
+      <if test="adicional2 != null" >
+        #{adicional2,jdbcType=VARCHAR},
+      </if>
+      <if test="adicional1 != null" >
+        #{adicional1,jdbcType=VARCHAR},
+      </if>
+      <if test="esDniPorLector != null" >
+        #{esDniPorLector,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.ClientesOnp" >
+    update CLIENTES_ONP
+    <set >
+      <if test="nombres != null" >
+        nombres = #{nombres,jdbcType=VARCHAR},
+      </if>
+      <if test="adicional2 != null" >
+        adicional_2 = #{adicional2,jdbcType=VARCHAR},
+      </if>
+      <if test="adicional1 != null" >
+        adicional_1 = #{adicional1,jdbcType=VARCHAR},
+      </if>
+      <if test="esDniPorLector != null" >
+        esDniPorLector = #{esDniPorLector,jdbcType=CHAR},
+      </if>
+    </set>
+    where dni = #{dni,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pe.com.certicom.scolas.model.beans.ClientesOnp" >
+    update CLIENTES_ONP
+    set nombres = #{nombres,jdbcType=VARCHAR},
+      adicional_2 = #{adicional2,jdbcType=VARCHAR},
+      adicional_1 = #{adicional1,jdbcType=VARCHAR},
+      esDniPorLector = #{esDniPorLector,jdbcType=CHAR}
+    where dni = #{dni,jdbcType=CHAR}
+  </update>
+</mapper>

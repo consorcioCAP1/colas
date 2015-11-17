@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pe.com.certicom.scolas.model.mybatis.dao.TurnosMapper" >
+  <resultMap id="BaseResultMap" type="pe.com.certicom.scolas.model.beans.Turnos" >
+    <id column="Id_Turno" property="idTurno" jdbcType="INTEGER" />
+    <result column="Codigo" property="codigo" jdbcType="CHAR" />
+    <result column="Nombre" property="nombre" jdbcType="VARCHAR" />
+    <result column="Descripcion" property="descripcion" jdbcType="VARCHAR" />
+    <result column="HoraInicio" property="horainicio" jdbcType="TIMESTAMP" />
+    <result column="HoraFinal" property="horafinal" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id_Turno, Codigo, Nombre, Descripcion, HoraInicio, HoraFinal
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TURNOS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TURNOS
+    where Id_Turno = #{idTurno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TURNOS
+    where Id_Turno = #{idTurno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pe.com.certicom.scolas.model.beans.Turnos" >
+    insert into TURNOS (Id_Turno, Codigo, Nombre, 
+      Descripcion, HoraInicio, HoraFinal
+      )
+    values (#{idTurno,jdbcType=INTEGER}, #{codigo,jdbcType=CHAR}, #{nombre,jdbcType=VARCHAR}, 
+      #{descripcion,jdbcType=VARCHAR}, #{horainicio,jdbcType=TIMESTAMP}, #{horafinal,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.Turnos" >
+    insert into TURNOS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idTurno != null" >
+        Id_Turno,
+      </if>
+      <if test="codigo != null" >
+        Codigo,
+      </if>
+      <if test="nombre != null" >
+        Nombre,
+      </if>
+      <if test="descripcion != null" >
+        Descripcion,
+      </if>
+      <if test="horainicio != null" >
+        HoraInicio,
+      </if>
+      <if test="horafinal != null" >
+        HoraFinal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idTurno != null" >
+        #{idTurno,jdbcType=INTEGER},
+      </if>
+      <if test="codigo != null" >
+        #{codigo,jdbcType=CHAR},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        #{descripcion,jdbcType=VARCHAR},
+      </if>
+      <if test="horainicio != null" >
+        #{horainicio,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horafinal != null" >
+        #{horafinal,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.Turnos" >
+    update TURNOS
+    <set >
+      <if test="codigo != null" >
+        Codigo = #{codigo,jdbcType=CHAR},
+      </if>
+      <if test="nombre != null" >
+        Nombre = #{nombre,jdbcType=VARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        Descripcion = #{descripcion,jdbcType=VARCHAR},
+      </if>
+      <if test="horainicio != null" >
+        HoraInicio = #{horainicio,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horafinal != null" >
+        HoraFinal = #{horafinal,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Id_Turno = #{idTurno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pe.com.certicom.scolas.model.beans.Turnos" >
+    update TURNOS
+    set Codigo = #{codigo,jdbcType=CHAR},
+      Nombre = #{nombre,jdbcType=VARCHAR},
+      Descripcion = #{descripcion,jdbcType=VARCHAR},
+      HoraInicio = #{horainicio,jdbcType=TIMESTAMP},
+      HoraFinal = #{horafinal,jdbcType=TIMESTAMP}
+    where Id_Turno = #{idTurno,jdbcType=INTEGER}
+  </update>
+</mapper>

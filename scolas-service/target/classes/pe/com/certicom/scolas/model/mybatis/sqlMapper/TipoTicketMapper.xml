@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pe.com.certicom.scolas.model.mybatis.dao.TipoTicketMapper" >
+  <resultMap id="BaseResultMap" type="pe.com.certicom.scolas.model.beans.TipoTicket" >
+    <id column="id_tipo_ticket" property="idTipoTicket" jdbcType="INTEGER" />
+    <result column="nombre" property="nombre" jdbcType="NVARCHAR" />
+    <result column="id_tipo_atencion" property="idTipoAtencion" jdbcType="INTEGER" />
+    <result column="codigo_impresion" property="codigoImpresion" jdbcType="NVARCHAR" />
+    <result column="codigo_tarjeta" property="codigoTarjeta" jdbcType="NVARCHAR" />
+    <result column="descripcion" property="descripcion" jdbcType="NVARCHAR" />
+    <result column="tiempo_optimo_atencion" property="tiempoOptimoAtencion" jdbcType="TIMESTAMP" />
+    <result column="tiempo_optimo_espera" property="tiempoOptimoEspera" jdbcType="TIMESTAMP" />
+    <result column="id_seccion" property="idSeccion" jdbcType="INTEGER" />
+    <result column="tiempo_demora_atencion" property="tiempoDemoraAtencion" jdbcType="INTEGER" />
+    <result column="id_oficina" property="idOficina" jdbcType="INTEGER" />
+    <result column="Activo" property="activo" jdbcType="BIT" />
+    <result column="Visible" property="visible" jdbcType="BIT" />
+    <result column="Especial" property="especial" jdbcType="BIT" />
+    <result column="tiempo_espera_min" property="tiempoEsperaMin" jdbcType="INTEGER" />
+    <result column="tiempo_espera_max" property="tiempoEsperaMax" jdbcType="INTEGER" />
+    <result column="tiempo_atencion_min" property="tiempoAtencionMin" jdbcType="INTEGER" />
+    <result column="tiempo_atencion_max" property="tiempoAtencionMax" jdbcType="INTEGER" />
+    <result column="TiempoMaxEsperaPrioridad2" property="tiempomaxesperaprioridad2" jdbcType="INTEGER" />
+    <result column="FactorPrioridad2" property="factorprioridad2" jdbcType="INTEGER" />
+    <result column="Es_Titular" property="esTitular" jdbcType="BIT" />
+    <result column="Es_Apoderado" property="esApoderado" jdbcType="BIT" />
+    <result column="Es_Tercero" property="esTercero" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_tipo_ticket, nombre, id_tipo_atencion, codigo_impresion, codigo_tarjeta, descripcion, 
+    tiempo_optimo_atencion, tiempo_optimo_espera, id_seccion, tiempo_demora_atencion, 
+    id_oficina, Activo, Visible, Especial, tiempo_espera_min, tiempo_espera_max, tiempo_atencion_min, 
+    tiempo_atencion_max, TiempoMaxEsperaPrioridad2, FactorPrioridad2, Es_Titular, Es_Apoderado, 
+    Es_Tercero
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TIPO_TICKET
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from TIPO_TICKET
+    where id_tipo_ticket = #{idTipoTicket,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TIPO_TICKET
+    where id_tipo_ticket = #{idTipoTicket,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pe.com.certicom.scolas.model.beans.TipoTicket" >
+    insert into TIPO_TICKET (id_tipo_ticket, nombre, id_tipo_atencion, 
+      codigo_impresion, codigo_tarjeta, descripcion, 
+      tiempo_optimo_atencion, tiempo_optimo_espera, 
+      id_seccion, tiempo_demora_atencion, id_oficina, 
+      Activo, Visible, Especial, tiempo_espera_min, 
+      tiempo_espera_max, tiempo_atencion_min, tiempo_atencion_max, 
+      TiempoMaxEsperaPrioridad2, FactorPrioridad2, 
+      Es_Titular, Es_Apoderado, Es_Tercero
+      )
+    values (#{idTipoTicket,jdbcType=INTEGER}, #{nombre,jdbcType=NVARCHAR}, #{idTipoAtencion,jdbcType=INTEGER}, 
+      #{codigoImpresion,jdbcType=NVARCHAR}, #{codigoTarjeta,jdbcType=NVARCHAR}, #{descripcion,jdbcType=NVARCHAR}, 
+      #{tiempoOptimoAtencion,jdbcType=TIMESTAMP}, #{tiempoOptimoEspera,jdbcType=TIMESTAMP}, 
+      #{idSeccion,jdbcType=INTEGER}, #{tiempoDemoraAtencion,jdbcType=INTEGER}, #{idOficina,jdbcType=INTEGER}, 
+      #{activo,jdbcType=BIT}, #{visible,jdbcType=BIT}, #{especial,jdbcType=BIT}, #{tiempoEsperaMin,jdbcType=INTEGER}, 
+      #{tiempoEsperaMax,jdbcType=INTEGER}, #{tiempoAtencionMin,jdbcType=INTEGER}, #{tiempoAtencionMax,jdbcType=INTEGER}, 
+      #{tiempomaxesperaprioridad2,jdbcType=INTEGER}, #{factorprioridad2,jdbcType=INTEGER}, 
+      #{esTitular,jdbcType=BIT}, #{esApoderado,jdbcType=BIT}, #{esTercero,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.TipoTicket" >
+    insert into TIPO_TICKET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idTipoTicket != null" >
+        id_tipo_ticket,
+      </if>
+      <if test="nombre != null" >
+        nombre,
+      </if>
+      <if test="idTipoAtencion != null" >
+        id_tipo_atencion,
+      </if>
+      <if test="codigoImpresion != null" >
+        codigo_impresion,
+      </if>
+      <if test="codigoTarjeta != null" >
+        codigo_tarjeta,
+      </if>
+      <if test="descripcion != null" >
+        descripcion,
+      </if>
+      <if test="tiempoOptimoAtencion != null" >
+        tiempo_optimo_atencion,
+      </if>
+      <if test="tiempoOptimoEspera != null" >
+        tiempo_optimo_espera,
+      </if>
+      <if test="idSeccion != null" >
+        id_seccion,
+      </if>
+      <if test="tiempoDemoraAtencion != null" >
+        tiempo_demora_atencion,
+      </if>
+      <if test="idOficina != null" >
+        id_oficina,
+      </if>
+      <if test="activo != null" >
+        Activo,
+      </if>
+      <if test="visible != null" >
+        Visible,
+      </if>
+      <if test="especial != null" >
+        Especial,
+      </if>
+      <if test="tiempoEsperaMin != null" >
+        tiempo_espera_min,
+      </if>
+      <if test="tiempoEsperaMax != null" >
+        tiempo_espera_max,
+      </if>
+      <if test="tiempoAtencionMin != null" >
+        tiempo_atencion_min,
+      </if>
+      <if test="tiempoAtencionMax != null" >
+        tiempo_atencion_max,
+      </if>
+      <if test="tiempomaxesperaprioridad2 != null" >
+        TiempoMaxEsperaPrioridad2,
+      </if>
+      <if test="factorprioridad2 != null" >
+        FactorPrioridad2,
+      </if>
+      <if test="esTitular != null" >
+        Es_Titular,
+      </if>
+      <if test="esApoderado != null" >
+        Es_Apoderado,
+      </if>
+      <if test="esTercero != null" >
+        Es_Tercero,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idTipoTicket != null" >
+        #{idTipoTicket,jdbcType=INTEGER},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=NVARCHAR},
+      </if>
+      <if test="idTipoAtencion != null" >
+        #{idTipoAtencion,jdbcType=INTEGER},
+      </if>
+      <if test="codigoImpresion != null" >
+        #{codigoImpresion,jdbcType=NVARCHAR},
+      </if>
+      <if test="codigoTarjeta != null" >
+        #{codigoTarjeta,jdbcType=NVARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="tiempoOptimoAtencion != null" >
+        #{tiempoOptimoAtencion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tiempoOptimoEspera != null" >
+        #{tiempoOptimoEspera,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idSeccion != null" >
+        #{idSeccion,jdbcType=INTEGER},
+      </if>
+      <if test="tiempoDemoraAtencion != null" >
+        #{tiempoDemoraAtencion,jdbcType=INTEGER},
+      </if>
+      <if test="idOficina != null" >
+        #{idOficina,jdbcType=INTEGER},
+      </if>
+      <if test="activo != null" >
+        #{activo,jdbcType=BIT},
+      </if>
+      <if test="visible != null" >
+        #{visible,jdbcType=BIT},
+      </if>
+      <if test="especial != null" >
+        #{especial,jdbcType=BIT},
+      </if>
+      <if test="tiempoEsperaMin != null" >
+        #{tiempoEsperaMin,jdbcType=INTEGER},
+      </if>
+      <if test="tiempoEsperaMax != null" >
+        #{tiempoEsperaMax,jdbcType=INTEGER},
+      </if>
+      <if test="tiempoAtencionMin != null" >
+        #{tiempoAtencionMin,jdbcType=INTEGER},
+      </if>
+      <if test="tiempoAtencionMax != null" >
+        #{tiempoAtencionMax,jdbcType=INTEGER},
+      </if>
+      <if test="tiempomaxesperaprioridad2 != null" >
+        #{tiempomaxesperaprioridad2,jdbcType=INTEGER},
+      </if>
+      <if test="factorprioridad2 != null" >
+        #{factorprioridad2,jdbcType=INTEGER},
+      </if>
+      <if test="esTitular != null" >
+        #{esTitular,jdbcType=BIT},
+      </if>
+      <if test="esApoderado != null" >
+        #{esApoderado,jdbcType=BIT},
+      </if>
+      <if test="esTercero != null" >
+        #{esTercero,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.TipoTicket" >
+    update TIPO_TICKET
+    <set >
+      <if test="nombre != null" >
+        nombre = #{nombre,jdbcType=NVARCHAR},
+      </if>
+      <if test="idTipoAtencion != null" >
+        id_tipo_atencion = #{idTipoAtencion,jdbcType=INTEGER},
+      </if>
+      <if test="codigoImpresion != null" >
+        codigo_impresion = #{codigoImpresion,jdbcType=NVARCHAR},
+      </if>
+      <if test="codigoTarjeta != null" >
+        codigo_tarjeta = #{codigoTarjeta,jdbcType=NVARCHAR},
+      </if>
+      <if test="descripcion != null" >
+        descripcion = #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="tiempoOptimoAtencion != null" >
+        tiempo_optimo_atencion = #{tiempoOptimoAtencion,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tiempoOptimoEspera != null" >
+        tiempo_optimo_espera = #{tiempoOptimoEspera,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idSeccion != null" >
+        id_seccion = #{idSeccion,jdbcType=INTEGER},
+      </if>
+      <if test="tiempoDemoraAtencion != null" >
+        tiempo_demora_atencion = #{tiempoDemoraAtencion,jdbcType=INTEGER},
+      </if>
+      <if test="idOficina != null" >
+        id_oficina = #{idOficina,jdbcType=INTEGER},
+      </if>
+      <if test="activo != null" >
+        Activo = #{activo,jdbcType=BIT},
+      </if>
+      <if test="visible != null" >
+        Visible = #{visible,jdbcType=BIT},
+      </if>
+      <if test="especial != null" >
+        Especial = #{especial,jdbcType=BIT},
+      </if>
+      <if test="tiempoEsperaMin != null" >
+        tiempo_espera_min = #{tiempoEsperaMin,jdbcType=INTEGER},
+      </if>
+      <if test="tiempoEsperaMax != null" >
+        tiempo_espera_max = #{tiempoEsperaMax,jdbcType=INTEGER},
+      </if>
+      <if test="tiempoAtencionMin != null" >
+        tiempo_atencion_min = #{tiempoAtencionMin,jdbcType=INTEGER},
+      </if>
+      <if test="tiempoAtencionMax != null" >
+        tiempo_atencion_max = #{tiempoAtencionMax,jdbcType=INTEGER},
+      </if>
+      <if test="tiempomaxesperaprioridad2 != null" >
+        TiempoMaxEsperaPrioridad2 = #{tiempomaxesperaprioridad2,jdbcType=INTEGER},
+      </if>
+      <if test="factorprioridad2 != null" >
+        FactorPrioridad2 = #{factorprioridad2,jdbcType=INTEGER},
+      </if>
+      <if test="esTitular != null" >
+        Es_Titular = #{esTitular,jdbcType=BIT},
+      </if>
+      <if test="esApoderado != null" >
+        Es_Apoderado = #{esApoderado,jdbcType=BIT},
+      </if>
+      <if test="esTercero != null" >
+        Es_Tercero = #{esTercero,jdbcType=BIT},
+      </if>
+    </set>
+    where id_tipo_ticket = #{idTipoTicket,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pe.com.certicom.scolas.model.beans.TipoTicket" >
+    update TIPO_TICKET
+    set nombre = #{nombre,jdbcType=NVARCHAR},
+      id_tipo_atencion = #{idTipoAtencion,jdbcType=INTEGER},
+      codigo_impresion = #{codigoImpresion,jdbcType=NVARCHAR},
+      codigo_tarjeta = #{codigoTarjeta,jdbcType=NVARCHAR},
+      descripcion = #{descripcion,jdbcType=NVARCHAR},
+      tiempo_optimo_atencion = #{tiempoOptimoAtencion,jdbcType=TIMESTAMP},
+      tiempo_optimo_espera = #{tiempoOptimoEspera,jdbcType=TIMESTAMP},
+      id_seccion = #{idSeccion,jdbcType=INTEGER},
+      tiempo_demora_atencion = #{tiempoDemoraAtencion,jdbcType=INTEGER},
+      id_oficina = #{idOficina,jdbcType=INTEGER},
+      Activo = #{activo,jdbcType=BIT},
+      Visible = #{visible,jdbcType=BIT},
+      Especial = #{especial,jdbcType=BIT},
+      tiempo_espera_min = #{tiempoEsperaMin,jdbcType=INTEGER},
+      tiempo_espera_max = #{tiempoEsperaMax,jdbcType=INTEGER},
+      tiempo_atencion_min = #{tiempoAtencionMin,jdbcType=INTEGER},
+      tiempo_atencion_max = #{tiempoAtencionMax,jdbcType=INTEGER},
+      TiempoMaxEsperaPrioridad2 = #{tiempomaxesperaprioridad2,jdbcType=INTEGER},
+      FactorPrioridad2 = #{factorprioridad2,jdbcType=INTEGER},
+      Es_Titular = #{esTitular,jdbcType=BIT},
+      Es_Apoderado = #{esApoderado,jdbcType=BIT},
+      Es_Tercero = #{esTercero,jdbcType=BIT}
+    where id_tipo_ticket = #{idTipoTicket,jdbcType=INTEGER}
+  </update>
+</mapper>

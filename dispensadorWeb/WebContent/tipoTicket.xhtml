@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head> 
+	<title>DISPENSADOR WEB</title>   
+</h:head>
+
+	<h:form prependId="false" id="form1">
+			
+		
+		<div  style="HEIGHT: 120px" class="content" >					
+        	<p:panel id="panelTipoTicket"   header="Tipo Ticket" >		        	
+    			<p:dataGrid var="car" value="#{tipoTicketController.lstTipoTicket}" columns="2" effect="true">
+    				 <p:column>
+	    				<p:commandButton title="#{car.descripcion}" value="#{car.nombre}" 
+	    					action="#{tipoTicketController.generarTicket(car)}" style="width:300px;height:100px"
+	    					update=":form1:dlgConfirmacionTicket">	    						
+	    				</p:commandButton>
+    				 </p:column>   				 	    			     			
+    			</p:dataGrid>	    			
+    			 
+    			<br/>
+		      	 <br/>
+		      	 <br/>
+		      	 <br/>
+    			
+    			<h:panelGrid columns="1">		    					    			
+			    	<p:commandButton value="Atras" action="#{tipoTicketController.regresar()}" style="width:150px;height:40px; background-image:none;background-color: blue;color: white;"/>	    		    		
+	    		</h:panelGrid>
+			    		
+			   <h:panelGrid columns="1" id="dlgConfirmacionTicket">	
+					<p:dialog header="ticket de cliente" height="100"  modal="true"
+			  				visible="#{tipoTicketController.mostrarPopup}">
+				    	<h:outputText value="#{tipoTicketController.impresion}" />
+					</p:dialog> 
+				</h:panelGrid>
+			    		
+	      	</p:panel>   
+	      	<p:resizable for="panelTipoTicket" />
+	            	       		
+       	</div>
+       
+   		
+   		<p:poll interval="8" listener="#{tipoTicketController.redirectInicio}"/>	
+    </h:form>
+
+</html>
+

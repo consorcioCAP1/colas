@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pe.com.certicom.scolas.model.mybatis.dao.VentanillaMapper" >
+  <resultMap id="BaseResultMap" type="pe.com.certicom.scolas.model.beans.Ventanilla" >
+    <id column="id_ventanilla" property="idVentanilla" jdbcType="INTEGER" />
+    <result column="nombre" property="nombre" jdbcType="NVARCHAR" />
+    <result column="nombre_tv" property="nombreTv" jdbcType="NVARCHAR" />
+    <result column="id_tipo_atencion" property="idTipoAtencion" jdbcType="INTEGER" />
+    <result column="id_espacio_atencion" property="idEspacioAtencion" jdbcType="INTEGER" />
+    <result column="id_peso" property="idPeso" jdbcType="INTEGER" />
+    <result column="HoraInicioAten" property="horainicioaten" jdbcType="TIMESTAMP" />
+    <result column="HoraFinAten" property="horafinaten" jdbcType="TIMESTAMP" />
+    <result column="PermiteDerivacion" property="permitederivacion" jdbcType="BIT" />
+    <result column="AceptaTickDerivados" property="aceptatickderivados" jdbcType="BIT" />
+    <result column="tiempo_minimo_espera" property="tiempoMinimoEspera" jdbcType="INTEGER" />
+    <result column="Descripcion" property="descripcion" jdbcType="NVARCHAR" />
+    <result column="tiempo_retardo_rellamada" property="tiempoRetardoRellamada" jdbcType="INTEGER" />
+    <result column="numero_max_rellamada" property="numeroMaxRellamada" jdbcType="INTEGER" />
+    <result column="Permite_Prioridad_Derivacion" property="permitePrioridadDerivacion" jdbcType="BIT" />
+    <result column="Permite_Ticket_Interno" property="permiteTicketInterno" jdbcType="BIT" />
+    <result column="Activo" property="activo" jdbcType="BIT" />
+    <result column="id_oficina" property="idOficina" jdbcType="INTEGER" />
+    <result column="id_area" property="idArea" jdbcType="INTEGER" />
+    <result column="id_usuario" property="idUsuario" jdbcType="INTEGER" />
+    <result column="ind_transaccion" property="indTransaccion" jdbcType="CHAR" />
+    <result column="id_estado_atendedor" property="idEstadoAtendedor" jdbcType="INTEGER" />
+    <result column="des_ip" property="desIp" jdbcType="VARCHAR" />
+    <result column="id_precola" property="idPrecola" jdbcType="INTEGER" />
+    <result column="ind_tipo_llamado" property="indTipoLlamado" jdbcType="CHAR" />
+    <result column="permite_registro_cliente" property="permiteRegistroCliente" jdbcType="CHAR" />
+    <result column="id_tipo_ticket_default" property="idTipoTicketDefault" jdbcType="INTEGER" />
+    <result column="ind_llamado_automatico" property="indLlamadoAutomatico" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id_ventanilla, nombre, nombre_tv, id_tipo_atencion, id_espacio_atencion, id_peso, 
+    HoraInicioAten, HoraFinAten, PermiteDerivacion, AceptaTickDerivados, tiempo_minimo_espera, 
+    Descripcion, tiempo_retardo_rellamada, numero_max_rellamada, Permite_Prioridad_Derivacion, 
+    Permite_Ticket_Interno, Activo, id_oficina, id_area, id_usuario, ind_transaccion, 
+    id_estado_atendedor, des_ip, id_precola, ind_tipo_llamado, permite_registro_cliente, 
+    id_tipo_ticket_default, ind_llamado_automatico
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="pe.com.certicom.scolas.util.CriteriaManager" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from VENTANILLA
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from VENTANILLA
+    where id_ventanilla = #{idVentanilla,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from VENTANILLA
+    where id_ventanilla = #{idVentanilla,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pe.com.certicom.scolas.model.beans.Ventanilla" >
+    insert into VENTANILLA (id_ventanilla, nombre, nombre_tv, 
+      id_tipo_atencion, id_espacio_atencion, id_peso, 
+      HoraInicioAten, HoraFinAten, PermiteDerivacion, 
+      AceptaTickDerivados, tiempo_minimo_espera, Descripcion, 
+      tiempo_retardo_rellamada, numero_max_rellamada, 
+      Permite_Prioridad_Derivacion, Permite_Ticket_Interno, 
+      Activo, id_oficina, id_area, 
+      id_usuario, ind_transaccion, id_estado_atendedor, 
+      des_ip, id_precola, ind_tipo_llamado, 
+      permite_registro_cliente, id_tipo_ticket_default, 
+      ind_llamado_automatico)
+    values (#{idVentanilla,jdbcType=INTEGER}, #{nombre,jdbcType=NVARCHAR}, #{nombreTv,jdbcType=NVARCHAR}, 
+      #{idTipoAtencion,jdbcType=INTEGER}, #{idEspacioAtencion,jdbcType=INTEGER}, #{idPeso,jdbcType=INTEGER}, 
+      #{horainicioaten,jdbcType=TIMESTAMP}, #{horafinaten,jdbcType=TIMESTAMP}, #{permitederivacion,jdbcType=BIT}, 
+      #{aceptatickderivados,jdbcType=BIT}, #{tiempoMinimoEspera,jdbcType=INTEGER}, #{descripcion,jdbcType=NVARCHAR}, 
+      #{tiempoRetardoRellamada,jdbcType=INTEGER}, #{numeroMaxRellamada,jdbcType=INTEGER}, 
+      #{permitePrioridadDerivacion,jdbcType=BIT}, #{permiteTicketInterno,jdbcType=BIT}, 
+      #{activo,jdbcType=BIT}, #{idOficina,jdbcType=INTEGER}, #{idArea,jdbcType=INTEGER}, 
+      #{idUsuario,jdbcType=INTEGER}, #{indTransaccion,jdbcType=CHAR}, #{idEstadoAtendedor,jdbcType=INTEGER}, 
+      #{desIp,jdbcType=VARCHAR}, #{idPrecola,jdbcType=INTEGER}, #{indTipoLlamado,jdbcType=CHAR}, 
+      #{permiteRegistroCliente,jdbcType=CHAR}, #{idTipoTicketDefault,jdbcType=INTEGER}, 
+      #{indLlamadoAutomatico,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pe.com.certicom.scolas.model.beans.Ventanilla" >
+    insert into VENTANILLA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idVentanilla != null" >
+        id_ventanilla,
+      </if>
+      <if test="nombre != null" >
+        nombre,
+      </if>
+      <if test="nombreTv != null" >
+        nombre_tv,
+      </if>
+      <if test="idTipoAtencion != null" >
+        id_tipo_atencion,
+      </if>
+      <if test="idEspacioAtencion != null" >
+        id_espacio_atencion,
+      </if>
+      <if test="idPeso != null" >
+        id_peso,
+      </if>
+      <if test="horainicioaten != null" >
+        HoraInicioAten,
+      </if>
+      <if test="horafinaten != null" >
+        HoraFinAten,
+      </if>
+      <if test="permitederivacion != null" >
+        PermiteDerivacion,
+      </if>
+      <if test="aceptatickderivados != null" >
+        AceptaTickDerivados,
+      </if>
+      <if test="tiempoMinimoEspera != null" >
+        tiempo_minimo_espera,
+      </if>
+      <if test="descripcion != null" >
+        Descripcion,
+      </if>
+      <if test="tiempoRetardoRellamada != null" >
+        tiempo_retardo_rellamada,
+      </if>
+      <if test="numeroMaxRellamada != null" >
+        numero_max_rellamada,
+      </if>
+      <if test="permitePrioridadDerivacion != null" >
+        Permite_Prioridad_Derivacion,
+      </if>
+      <if test="permiteTicketInterno != null" >
+        Permite_Ticket_Interno,
+      </if>
+      <if test="activo != null" >
+        Activo,
+      </if>
+      <if test="idOficina != null" >
+        id_oficina,
+      </if>
+      <if test="idArea != null" >
+        id_area,
+      </if>
+      <if test="idUsuario != null" >
+        id_usuario,
+      </if>
+      <if test="indTransaccion != null" >
+        ind_transaccion,
+      </if>
+      <if test="idEstadoAtendedor != null" >
+        id_estado_atendedor,
+      </if>
+      <if test="desIp != null" >
+        des_ip,
+      </if>
+      <if test="idPrecola != null" >
+        id_precola,
+      </if>
+      <if test="indTipoLlamado != null" >
+        ind_tipo_llamado,
+      </if>
+      <if test="permiteRegistroCliente != null" >
+        permite_registro_cliente,
+      </if>
+      <if test="idTipoTicketDefault != null" >
+        id_tipo_ticket_default,
+      </if>
+      <if test="indLlamadoAutomatico != null" >
+        ind_llamado_automatico,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idVentanilla != null" >
+        #{idVentanilla,jdbcType=INTEGER},
+      </if>
+      <if test="nombre != null" >
+        #{nombre,jdbcType=NVARCHAR},
+      </if>
+      <if test="nombreTv != null" >
+        #{nombreTv,jdbcType=NVARCHAR},
+      </if>
+      <if test="idTipoAtencion != null" >
+        #{idTipoAtencion,jdbcType=INTEGER},
+      </if>
+      <if test="idEspacioAtencion != null" >
+        #{idEspacioAtencion,jdbcType=INTEGER},
+      </if>
+      <if test="idPeso != null" >
+        #{idPeso,jdbcType=INTEGER},
+      </if>
+      <if test="horainicioaten != null" >
+        #{horainicioaten,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horafinaten != null" >
+        #{horafinaten,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permitederivacion != null" >
+        #{permitederivacion,jdbcType=BIT},
+      </if>
+      <if test="aceptatickderivados != null" >
+        #{aceptatickderivados,jdbcType=BIT},
+      </if>
+      <if test="tiempoMinimoEspera != null" >
+        #{tiempoMinimoEspera,jdbcType=INTEGER},
+      </if>
+      <if test="descripcion != null" >
+        #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="tiempoRetardoRellamada != null" >
+        #{tiempoRetardoRellamada,jdbcType=INTEGER},
+      </if>
+      <if test="numeroMaxRellamada != null" >
+        #{numeroMaxRellamada,jdbcType=INTEGER},
+      </if>
+      <if test="permitePrioridadDerivacion != null" >
+        #{permitePrioridadDerivacion,jdbcType=BIT},
+      </if>
+      <if test="permiteTicketInterno != null" >
+        #{permiteTicketInterno,jdbcType=BIT},
+      </if>
+      <if test="activo != null" >
+        #{activo,jdbcType=BIT},
+      </if>
+      <if test="idOficina != null" >
+        #{idOficina,jdbcType=INTEGER},
+      </if>
+      <if test="idArea != null" >
+        #{idArea,jdbcType=INTEGER},
+      </if>
+      <if test="idUsuario != null" >
+        #{idUsuario,jdbcType=INTEGER},
+      </if>
+      <if test="indTransaccion != null" >
+        #{indTransaccion,jdbcType=CHAR},
+      </if>
+      <if test="idEstadoAtendedor != null" >
+        #{idEstadoAtendedor,jdbcType=INTEGER},
+      </if>
+      <if test="desIp != null" >
+        #{desIp,jdbcType=VARCHAR},
+      </if>
+      <if test="idPrecola != null" >
+        #{idPrecola,jdbcType=INTEGER},
+      </if>
+      <if test="indTipoLlamado != null" >
+        #{indTipoLlamado,jdbcType=CHAR},
+      </if>
+      <if test="permiteRegistroCliente != null" >
+        #{permiteRegistroCliente,jdbcType=CHAR},
+      </if>
+      <if test="idTipoTicketDefault != null" >
+        #{idTipoTicketDefault,jdbcType=INTEGER},
+      </if>
+      <if test="indLlamadoAutomatico != null" >
+        #{indLlamadoAutomatico,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pe.com.certicom.scolas.model.beans.Ventanilla" >
+    update VENTANILLA
+    <set >
+      <if test="nombre != null" >
+        nombre = #{nombre,jdbcType=NVARCHAR},
+      </if>
+      <if test="nombreTv != null" >
+        nombre_tv = #{nombreTv,jdbcType=NVARCHAR},
+      </if>
+      <if test="idTipoAtencion != null" >
+        id_tipo_atencion = #{idTipoAtencion,jdbcType=INTEGER},
+      </if>
+      <if test="idEspacioAtencion != null" >
+        id_espacio_atencion = #{idEspacioAtencion,jdbcType=INTEGER},
+      </if>
+      <if test="idPeso != null" >
+        id_peso = #{idPeso,jdbcType=INTEGER},
+      </if>
+      <if test="horainicioaten != null" >
+        HoraInicioAten = #{horainicioaten,jdbcType=TIMESTAMP},
+      </if>
+      <if test="horafinaten != null" >
+        HoraFinAten = #{horafinaten,jdbcType=TIMESTAMP},
+      </if>
+      <if test="permitederivacion != null" >
+        PermiteDerivacion = #{permitederivacion,jdbcType=BIT},
+      </if>
+      <if test="aceptatickderivados != null" >
+        AceptaTickDerivados = #{aceptatickderivados,jdbcType=BIT},
+      </if>
+      <if test="tiempoMinimoEspera != null" >
+        tiempo_minimo_espera = #{tiempoMinimoEspera,jdbcType=INTEGER},
+      </if>
+      <if test="descripcion != null" >
+        Descripcion = #{descripcion,jdbcType=NVARCHAR},
+      </if>
+      <if test="tiempoRetardoRellamada != null" >
+        tiempo_retardo_rellamada = #{tiempoRetardoRellamada,jdbcType=INTEGER},
+      </if>
+      <if test="numeroMaxRellamada != null" >
+        numero_max_rellamada = #{numeroMaxRellamada,jdbcType=INTEGER},
+      </if>
+      <if test="permitePrioridadDerivacion != null" >
+        Permite_Prioridad_Derivacion = #{permitePrioridadDerivacion,jdbcType=BIT},
+      </if>
+      <if test="permiteTicketInterno != null" >
+        Permite_Ticket_Interno = #{permiteTicketInterno,jdbcType=BIT},
+      </if>
+      <if test="activo != null" >
+        Activo = #{activo,jdbcType=BIT},
+      </if>
+      <if test="idOficina != null" >
+        id_oficina = #{idOficina,jdbcType=INTEGER},
+      </if>
+      <if test="idArea != null" >
+        id_area = #{idArea,jdbcType=INTEGER},
+      </if>
+      <if test="idUsuario != null" >
+        id_usuario = #{idUsuario,jdbcType=INTEGER},
+      </if>
+      <if test="indTransaccion != null" >
+        ind_transaccion = #{indTransaccion,jdbcType=CHAR},
+      </if>
+      <if test="idEstadoAtendedor != null" >
+        id_estado_atendedor = #{idEstadoAtendedor,jdbcType=INTEGER},
+      </if>
+      <if test="desIp != null" >
+        des_ip = #{desIp,jdbcType=VARCHAR},
+      </if>
+      <if test="idPrecola != null" >
+        id_precola = #{idPrecola,jdbcType=INTEGER},
+      </if>
+      <if test="indTipoLlamado != null" >
+        ind_tipo_llamado = #{indTipoLlamado,jdbcType=CHAR},
+      </if>
+      <if test="permiteRegistroCliente != null" >
+        permite_registro_cliente = #{permiteRegistroCliente,jdbcType=CHAR},
+      </if>
+      <if test="idTipoTicketDefault != null" >
+        id_tipo_ticket_default = #{idTipoTicketDefault,jdbcType=INTEGER},
+      </if>
+      <if test="indLlamadoAutomatico != null" >
+        ind_llamado_automatico = #{indLlamadoAutomatico,jdbcType=CHAR},
+      </if>
+    </set>
+    where id_ventanilla = #{idVentanilla,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pe.com.certicom.scolas.model.beans.Ventanilla" >
+    update VENTANILLA
+    set nombre = #{nombre,jdbcType=NVARCHAR},
+      nombre_tv = #{nombreTv,jdbcType=NVARCHAR},
+      id_tipo_atencion = #{idTipoAtencion,jdbcType=INTEGER},
+      id_espacio_atencion = #{idEspacioAtencion,jdbcType=INTEGER},
+      id_peso = #{idPeso,jdbcType=INTEGER},
+      HoraInicioAten = #{horainicioaten,jdbcType=TIMESTAMP},
+      HoraFinAten = #{horafinaten,jdbcType=TIMESTAMP},
+      PermiteDerivacion = #{permitederivacion,jdbcType=BIT},
+      AceptaTickDerivados = #{aceptatickderivados,jdbcType=BIT},
+      tiempo_minimo_espera = #{tiempoMinimoEspera,jdbcType=INTEGER},
+      Descripcion = #{descripcion,jdbcType=NVARCHAR},
+      tiempo_retardo_rellamada = #{tiempoRetardoRellamada,jdbcType=INTEGER},
+      numero_max_rellamada = #{numeroMaxRellamada,jdbcType=INTEGER},
+      Permite_Prioridad_Derivacion = #{permitePrioridadDerivacion,jdbcType=BIT},
+      Permite_Ticket_Interno = #{permiteTicketInterno,jdbcType=BIT},
+      Activo = #{activo,jdbcType=BIT},
+      id_oficina = #{idOficina,jdbcType=INTEGER},
+      id_area = #{idArea,jdbcType=INTEGER},
+      id_usuario = #{idUsuario,jdbcType=INTEGER},
+      ind_transaccion = #{indTransaccion,jdbcType=CHAR},
+      id_estado_atendedor = #{idEstadoAtendedor,jdbcType=INTEGER},
+      des_ip = #{desIp,jdbcType=VARCHAR},
+      id_precola = #{idPrecola,jdbcType=INTEGER},
+      ind_tipo_llamado = #{indTipoLlamado,jdbcType=CHAR},
+      permite_registro_cliente = #{permiteRegistroCliente,jdbcType=CHAR},
+      id_tipo_ticket_default = #{idTipoTicketDefault,jdbcType=INTEGER},
+      ind_llamado_automatico = #{indLlamadoAutomatico,jdbcType=CHAR}
+    where id_ventanilla = #{idVentanilla,jdbcType=INTEGER}
+  </update>
+</mapper>
